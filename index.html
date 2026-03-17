@@ -1186,9 +1186,11 @@
         .map(id => document.getElementById(id))
         .filter(Boolean);
 
+      let clickLock = false;
+
       function updateActive() {
+        if (clickLock) return;
         let current = "";
-        // If scrolled to bottom, activate the last nav target
         const atBottom =
           window.innerHeight + window.scrollY >=
           document.body.scrollHeight - 40;
@@ -1226,6 +1228,21 @@
         }
       }
 
+      // Set sidebar active link immediately on click + scroll sidebar
+      function setActiveNav(targetId) {
+        clickLock = true;
+        navLinks.forEach(n => {
+          const isActive = n.getAttribute("href") === "#" + targetId;
+          n.classList.toggle("active", isActive);
+          if (isActive) {
+            const sidebar = document.querySelector(".sidebar");
+            const linkTop = n.offsetTop;
+            sidebar.scrollTo({ top: linkTop - sidebar.clientHeight / 2, behavior: "smooth" });
+          }
+        });
+        setTimeout(() => { clickLock = false; }, 1000);
+      }
+
       // Scroll to center + highlight for all internal links
       function handleInternalLink(e, link) {
         const href = link.getAttribute("href");
@@ -1238,6 +1255,7 @@
           if (target.classList.contains("qna-item") || target.classList.contains("template-box") || target.tagName === "TR") {
             target.classList.add("highlight");
           }
+          setActiveNav(id);
           target.scrollIntoView({ behavior: "smooth", block: "center" });
         }
         document.querySelector(".sidebar").classList.remove("open");
