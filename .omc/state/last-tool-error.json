@@ -1,0 +1,7 @@
+{
+  "tool_name": "Edit",
+  "tool_input_preview": "{\"file_path\":\"/Users/frankkim/Desktop/agora-stt-v2v-qna/agora-qna.html\",\"old_string\":\"      /* Sidebar: keep spans inline even in both mode */\\n      .sidebar body.lang-both .lang-kr,\\n      .sidebar ...",
+  "error": "File has been unexpectedly modified. Read it again before attempting to write it.",
+  "timestamp": "2026-03-17T06:56:41.166Z",
+  "retry_count": 1
+}

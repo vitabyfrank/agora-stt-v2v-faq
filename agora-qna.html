@@ -1,0 +1,1256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agora STT(V2V) - FAQ & Troubleshooting</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          "IBM Plex Sans",
+          "IBM Plex Sans KR",
+          -apple-system,
+          sans-serif;
+        background: #fafaf8;
+        color: #2c2c2c;
+        line-height: 1.7;
+      }
+
+      /* --- Layout --- */
+      .layout {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* --- Sidebar --- */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 220px;
+        height: 100vh;
+        background: #fff;
+        border-right: 1px solid #e8e8e8;
+        padding: 28px 0;
+        overflow-y: auto;
+        z-index: 10;
+      }
+
+      .sidebar-title {
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: #888;
+        padding: 0 20px;
+        margin-bottom: 20px;
+      }
+
+      .sidebar nav {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sidebar nav a {
+        display: block;
+        padding: 7px 20px;
+        font-size: 14px;
+        color: #555;
+        text-decoration: none;
+        border-left: 3px solid transparent;
+        transition: all 0.15s ease;
+      }
+
+      .sidebar nav a:hover {
+        color: #2c2c2c;
+        background: #f7f7f5;
+      }
+
+      .sidebar nav a.active {
+        color: #fff;
+        font-weight: 500;
+        border-left-color: #4a90d9;
+        background: #4a90d9;
+        border-radius: 0 4px 4px 0;
+      }
+
+      .sidebar nav .nav-section {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #999;
+        padding: 16px 20px 6px;
+        cursor: default;
+      }
+
+      .sidebar nav .nav-section:first-child {
+        padding-top: 0;
+      }
+
+      .sidebar nav a.nav-primary {
+        font-size: 15px;
+        font-weight: 600;
+        color: #2c2c2c;
+        padding: 10px 20px;
+      }
+
+      .sidebar nav a.nav-primary:hover {
+        background: #f0f0ed;
+      }
+
+      .sidebar nav a code {
+        font-family: "SF Mono", "Menlo", monospace;
+        font-size: 12px;
+        font-weight: 600;
+        background: #f0f0f0;
+        padding: 1px 5px;
+        border-radius: 3px;
+        pointer-events: none;
+      }
+
+      .sidebar nav a.nav-primary.active {
+        border-left-color: #4a90d9;
+        background: #4a90d9;
+        color: #fff;
+        border-radius: 0 4px 4px 0;
+      }
+
+      /* --- Main content --- */
+      .main {
+        margin-left: 220px;
+        flex: 1;
+        padding: 40px 48px;
+        padding-bottom: 40px;
+        max-width: 920px;
+      }
+
+      header {
+        border-bottom: 2px solid #2c2c2c;
+        padding-bottom: 16px;
+        margin-bottom: 48px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+
+      header h1 {
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: -0.3px;
+      }
+      header .subtitle {
+        font-size: 14px;
+        color: #666;
+        margin-top: 4px;
+      }
+
+      /* --- Language Toggle --- */
+      .lang-toggle {
+        display: flex;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        flex-shrink: 0;
+        margin-left: 24px;
+      }
+
+      .lang-toggle button {
+        padding: 6px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        font-family: inherit;
+        border: none;
+        background: #fff;
+        color: #999;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .lang-toggle button:not(:last-child) {
+        border-right: 1px solid #ddd;
+      }
+
+      .lang-toggle button.selected {
+        background: #2c2c2c;
+        color: #fff;
+      }
+
+      .lang-toggle button:hover:not(.selected) {
+        background: #f5f5f3;
+        color: #555;
+      }
+
+      /* --- Language visibility --- */
+      body.lang-kr .lang-en {
+        display: none;
+      }
+      body.lang-en .lang-kr {
+        display: none;
+      }
+      /* Sidebar: language switching */
+      body.lang-kr .sidebar .lang-en,
+      body.lang-en .sidebar .lang-kr {
+        display: none;
+      }
+
+      .section-title {
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: none;
+        letter-spacing: -0.2px;
+        color: #2c2c2c;
+        margin-bottom: 28px;
+        margin-top: 56px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e0e0e0;
+        scroll-margin-top: 24px;
+      }
+
+      .section-title:first-of-type {
+        margin-top: 0;
+      }
+
+      /* --- Q&A --- */
+      .qna-item {
+        margin-bottom: 32px;
+        padding-left: 20px;
+        border-left: 3px solid #e0e0e0;
+        scroll-margin-top: 24px;
+        transition: all 0.3s ease;
+      }
+
+      .qna-item:hover {
+        border-left-color: #2c2c2c;
+      }
+
+      .qna-item.highlight {
+        border: 1.5px solid #4a90d9;
+        border-left: 4px solid #4a90d9;
+        border-radius: 6px;
+        background: #f0f6ff;
+        padding: 16px 20px;
+        margin-left: -4px;
+        box-shadow: 0 2px 12px rgba(74, 144, 217, 0.12);
+        transition: all 0.3s ease;
+      }
+
+      .template-box.highlight {
+        border: 1.5px solid #4a90d9;
+        box-shadow: 0 2px 12px rgba(74, 144, 217, 0.12);
+        transition: all 0.3s ease;
+      }
+
+      tr.highlight td {
+        background: #f0f6ff !important;
+        transition: all 0.3s ease;
+      }
+
+      tr.highlight {
+        outline: 2px solid #4a90d9;
+        outline-offset: -1px;
+        border-radius: 4px;
+      }
+
+      .q {
+        font-weight: 600;
+        font-size: 17px;
+        margin-bottom: 4px;
+      }
+      .q::before {
+        content: "Q. ";
+        color: #999;
+        font-weight: 500;
+      }
+
+      .a {
+        font-size: 15px;
+        color: #444;
+        margin-top: 8px;
+      }
+      .a::before {
+        content: "A. ";
+        color: #999;
+        font-weight: 500;
+      }
+
+      /* --- Answer sub-elements --- */
+      .a .code-block {
+        display: block;
+        background: #f5f5f3;
+        border: 1px solid #e8e8e8;
+        border-radius: 4px;
+        padding: 12px 16px;
+        margin: 12px 0 8px;
+        font-family: "SF Mono", "Menlo", monospace;
+        font-size: 13px;
+        line-height: 1.8;
+        color: #333;
+      }
+
+      .a .callout {
+        display: block;
+        margin: 14px 0 8px;
+        padding: 12px 16px;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .a .callout-warning {
+        background: #fff8f0;
+        border-left: 3px solid #e6a040;
+      }
+
+      .a .callout-info {
+        background: #f0f6ff;
+        border-left: 3px solid #4a90d9;
+      }
+
+      .a .callout-label {
+        font-weight: 600;
+        margin-right: 4px;
+      }
+
+      .a .field-table {
+        display: block;
+        margin: 12px 0 8px;
+      }
+
+      .a .field-table .field-row {
+        padding: 6px 0;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 14px;
+      }
+
+      .a .field-table .field-row:last-child {
+        border-bottom: none;
+      }
+
+      .a .field-table code {
+        font-weight: 600;
+      }
+
+      /* --- Troubleshooting Template --- */
+      .template-box {
+        background: #fff;
+        border: 1px solid #e5e5e5;
+        border-radius: 6px;
+        padding: 28px 32px;
+        margin-bottom: 24px;
+        scroll-margin-top: 24px;
+      }
+
+      .template-box h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .field-row {
+        display: flex;
+        align-items: baseline;
+        margin-bottom: 12px;
+        font-size: 15px;
+      }
+
+      .field-label {
+        min-width: 200px;
+        font-weight: 500;
+        color: #444;
+      }
+
+      .field-value {
+        flex: 1;
+        border-bottom: 1px dashed #bbb;
+        padding-bottom: 2px;
+        color: #888;
+        font-size: 14px;
+      }
+
+      .note {
+        font-size: 13px;
+        color: #888;
+        margin-top: 16px;
+        font-style: italic;
+      }
+
+      .tag {
+        display: inline-block;
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 3px;
+        margin-right: 6px;
+        margin-bottom: 4px;
+        font-weight: 500;
+      }
+      .tag-general {
+        background: #f0f0f0;
+        color: #666;
+      }
+      .tag-config {
+        background: #fff3e0;
+        color: #b87333;
+      }
+      .tag-error {
+        background: #fce4ec;
+        color: #c0392b;
+      }
+      .tag-billing {
+        background: #e8f5e9;
+        color: #388e3c;
+      }
+
+      .divider {
+        border: none;
+        border-top: 1px solid #eee;
+        margin: 48px 0;
+      }
+
+      footer {
+        margin-top: 64px;
+        padding-top: 16px;
+        border-top: 1px solid #e0e0e0;
+        font-size: 12px;
+        color: #bbb;
+      }
+
+      @media print {
+        .sidebar {
+          display: none;
+        }
+        .main {
+          margin-left: 0;
+        }
+        .lang-toggle {
+          display: none;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .sidebar {
+          position: fixed;
+          width: 100%;
+          height: auto;
+          max-height: 0;
+          overflow: hidden;
+          border-right: none;
+          border-bottom: 1px solid #e8e8e8;
+          transition: max-height 0.3s ease;
+        }
+        .sidebar.open {
+          max-height: 80vh;
+          overflow-y: auto;
+        }
+        .main {
+          margin-left: 0;
+          padding: 24px 20px;
+          padding-top: 60px;
+        }
+        .menu-toggle {
+          display: flex !important;
+        }
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .lang-toggle {
+          margin-left: 0;
+          margin-top: 12px;
+        }
+        .field-row {
+          flex-direction: column;
+        }
+        .field-label {
+          min-width: auto;
+          margin-bottom: 2px;
+        }
+      }
+
+      .menu-toggle {
+        display: none;
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 20;
+        width: 36px;
+        height: 36px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 18px;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body class="lang-kr">
+    <div
+      class="menu-toggle"
+      onclick="document.querySelector('.sidebar').classList.toggle('open')">
+      &#9776;
+    </div>
+
+    <div class="layout">
+      <!-- ===== Sidebar ===== -->
+      <aside class="sidebar">
+        <div class="sidebar-title"><span class="lang-kr">목차</span><span class="lang-en">Contents</span></div>
+        <nav>
+          <a href="#getting-started" class="nav-primary"><span class="lang-kr">시작하기</span><span class="lang-en">Getting Started</span></a>
+          <a href="#q-enable-service"><span class="lang-kr">서비스 활성화</span><span class="lang-en">Enable service</span></a>
+
+          <a href="#usage" class="nav-primary" style="margin-top: 16px"><span class="lang-kr">사용량</span><span class="lang-en">Usage</span></a>
+          <a href="#q-check-usage"><span class="lang-kr">사용량 확인</span><span class="lang-en">Check usage</span></a>
+
+          <a href="#faq" class="nav-primary" style="margin-top: 16px"
+            ><span class="lang-kr">자주 묻는 질문</span><span class="lang-en">Frequently Asked Questions</span></a
+          >
+          <a href="#q-multilang"><span class="lang-kr">다국어 지원</span><span class="lang-en">Multi-language support</span></a>
+          <a href="#q-multi-agent"><span class="lang-kr">멀티 에이전트</span><span class="lang-en">Multiple agents</span></a>
+          <a href="#q-no-response"><span class="lang-kr">에이전트 무응답</span><span class="lang-en">Agent not responding</span></a>
+          <a href="#q-worker-per-lang"><span class="lang-kr">1 worker = 1 언어</span><span class="lang-en">1 worker = 1 language</span></a>
+          <a href="#q-uid-mismatch"><span class="lang-kr">UID 필드 설명</span><span class="lang-en">UID fields explained</span></a>
+          <a href="#q-token-mismatch"><span class="lang-kr">에이전트 토큰</span><span class="lang-en">Agent token</span></a>
+          <a href="#q-409-conflict"><span class="lang-kr">여러 에이전트 충돌</span><span class="lang-en">Agents Conflict</span></a>
+
+          <a
+            href="#troubleshooting"
+            class="nav-primary"
+            style="margin-top: 16px"
+            ><span class="lang-kr">트러블슈팅 템플릿</span><span class="lang-en">Troubleshooting Template</span></a
+          >
+          <a href="#tpl-basic"><span class="lang-kr">기본 정보</span><span class="lang-en">Basic info</span></a>
+          <a href="#tpl-api"><span class="lang-kr">API 정보</span><span class="lang-en">API details</span></a>
+          <a href="#tpl-optional"><span class="lang-kr">추가 정보</span><span class="lang-en">Additional context</span></a>
+
+          <a href="#error-codes" class="nav-primary" style="margin-top: 16px"
+            ><span class="lang-kr">주요 에러 코드</span><span class="lang-en">Common Error Codes</span></a
+          >
+          <a href="#err-200"><code>200</code> <span class="lang-kr">성공 (주의)</span><span class="lang-en">Success (Caution)</span></a>
+          <a href="#err-401"><code>401</code> <span class="lang-kr">인증 실패</span><span class="lang-en">Unauthorized</span></a>
+          <a href="#err-403"><code>403</code> <span class="lang-kr">권한 없음</span><span class="lang-en">Forbidden</span></a>
+          <a href="#err-409"><code>409</code> <span class="lang-kr">작업 충돌</span><span class="lang-en">Conflict</span></a>
+          <a href="#err-404"><code>404</code> <span class="lang-kr">리소스 없음</span><span class="lang-en">Not Found</span></a>
+          <a href="#err-500"><code>500</code> <span class="lang-kr">서버 오류</span><span class="lang-en">Server Error</span></a>
+
+          <a href="#resources" class="nav-primary" style="margin-top: 16px"
+            ><span class="lang-kr">리소스</span><span class="lang-en">Resources</span></a
+          >
+          <a href="https://dl.agoralab.co/v2v/" target="_blank"><span class="lang-kr">데모</span><span class="lang-en">Demo</span></a>
+          <a href="https://dl.agoralab.co/v2v/docs/#/ko/" target="_blank"><span class="lang-kr">공식 문서</span><span class="lang-en">Documentation</span></a>
+        </nav>
+      </aside>
+
+      <!-- ===== Main ===== -->
+      <div class="main">
+        <header>
+          <div>
+            <h1>Agora STT(V2V) - Q&A</h1>
+            <div class="subtitle">
+              자주 묻는 질문 및 문제 해결 가이드 &nbsp;|&nbsp; Last updated:
+              2026-03-17
+            </div>
+          </div>
+          <div class="lang-toggle">
+            <button onclick="setLang('kr')" class="selected">한국어</button>
+            <button onclick="setLang('en')">EN</button>
+          </div>
+        </header>
+
+        <!-- ============================== Getting Started ============================== -->
+        <div class="section-title" id="getting-started"><span class="lang-kr">시작하기</span><span class="lang-en">Getting Started</span></div>
+
+        <div class="qna-item" id="q-enable-service">
+          <div class="q">
+            <span class="lang-kr">STT(V2V) 서비스를 사용하려면 어떻게 해야 하나요?</span>
+            <span class="lang-en">How do I get started with the STT(V2V) service?</span>
+          </div>
+          <div class="a">
+            <span class="lang-kr">
+              먼저 Agora Console에서 <strong>Conversational AI Engine</strong>을 활성화해야 합니다.
+              활성화하지 않으면 API 호출 시 권한 오류가 발생합니다.
+              <span class="callout callout-info">
+                <span class="callout-label">활성화 방법:</span>
+                Agora Console → 프로젝트 선택 → Usage → Conversational AI Engine → 활성화(Enable)
+              </span>
+            </span>
+            <span class="lang-en">
+              You must first enable <strong>Conversational AI Engine</strong> in the Agora Console.
+              Without activation, API calls will return permission errors.
+              <span class="callout callout-info">
+                <span class="callout-label">How to enable:</span>
+                Agora Console → Select Project → Usage → Conversational AI Engine → Enable
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- ============================== Usage ============================== -->
+        <div class="section-title" id="usage"><span class="lang-kr">사용량</span><span class="lang-en">Usage</span></div>
+
+        <div class="qna-item" id="q-check-usage">
+          <div class="q">
+            <span class="lang-kr">사용량은 어디서 확인할 수 있나요?</span>
+            <span class="lang-en">Where can I check my usage?</span>
+          </div>
+          <div class="a">
+            <span class="lang-kr">
+              STT(V2V) 사용량은 Agora Console의 Conversational AI Engine
+              항목에서 직접 확인하실 수 있습니다. <br/> STT(V2V) 솔루션과 Conversational AI Engine의 사용량(usage)을 Console에서 분리하여
+              확인할 수 있는 기능은 현재 준비 중에 있습니다.
+              <span class="callout callout-info">
+                <a href="https://console.agora.io/usage?feature=convo-ai" target="_blank" style="color: #4a90d9; text-decoration: none; font-weight: 500;">Agora Console Usage →</a>
+              </span>
+            </span>
+            <span class="lang-en">
+              STT (V2V) usage is currently available in the Conversational AI
+              Engine section of the Agora Console. <br/>The ability to view STT (V2V)
+              usage separately from Conversational AI Engine usage is currently
+              under development.
+              <span class="callout callout-info">
+                <a href="https://console.agora.io/usage?feature=convo-ai" target="_blank" style="color: #4a90d9; text-decoration: none; font-weight: 500;">Agora Console Usage →</a>
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- ============================== FAQ ============================== -->
+        <div class="section-title" id="faq"><span class="lang-kr">자주 묻는 질문</span><span class="lang-en">Frequently Asked Questions</span></div>
+
+        <div class="qna-item" id="q-multilang">
+          <div class="q">
+            <span class="lang-kr">이 API는 여러 언어를 지원하나요?</span>
+            <span class="lang-en"
+              >Does this API support multiple languages?</span
+            >
+          </div>
+          <div class="a">
+            <span class="lang-kr"
+              >네, 지원합니다. 다만 각 언어별로 별도의 API(에이전트)를 시작해야
+              합니다.</span
+            >
+            <span class="lang-en"
+              >Yes, but you need to start a separate agent for each
+              language.</span
+            >
+          </div>
+        </div>
+
+        <div class="qna-item" id="q-multi-agent">
+          <div class="q">
+            <span class="lang-kr"
+              >하나의 채널에서 여러 에이전트를 동시에 사용할 수 있나요?</span
+            >
+            <span class="lang-en"
+              >Can I run multiple agents in a single channel at the same
+              time?</span
+            >
+          </div>
+          <div class="a">
+            <span class="lang-kr"
+              >가능합니다. 각 에이전트에 고유한 agent name을 부여하면 동일
+              채널에서 병렬 운영됩니다.</span
+            >
+            <span class="lang-en"
+              >Yes. Assign a unique agent name to each agent and they can operate
+              in parallel within the same channel.</span
+            >
+          </div>
+        </div>
+
+        <div class="qna-item" id="q-no-response">
+          <div class="q">
+            <span class="lang-kr">통화 중 에이전트가 응답하지 않습니다.</span>
+            <span class="lang-en"
+              >The agent is not responding during a call.</span
+            >
+          </div>
+          <div class="a">
+            <span class="lang-kr"
+              >아래 <a href="#troubleshooting" style="color: inherit; text-decoration: underline">트러블슈팅 템플릿</a>을 작성하여 지원팀에 공유해 주세요.</span
+            >
+            <span class="lang-en"
+              >Please fill out the <a href="#troubleshooting" style="color: inherit; text-decoration: underline">troubleshooting template</a> below and share with
+              support.</span
+            >
+          </div>
+        </div>
+
+        <div class="qna-item" id="q-200-but-fail">
+          <div class="q">
+            <span class="lang-kr">API 응답은 200(성공)인데 에이전트가 동작하지 않습니다.</span>
+            <span class="lang-en">API returns 200 (success) but the agent is not working.</span>
+          </div>
+          <div class="a">
+            <span class="lang-kr">
+              RTC 토큰 서버와 Agent 서버는 분리되어 운영됩니다.
+              STT 서버에서 요청을 정상적으로 수신하여 200 응답을 반환하더라도, RTC 토큰에 문제가 있을 경우 에이전트는 채널에 참여하지 못합니다.
+              <span class="callout callout-warning">
+                <span class="callout-label">확인 사항:</span>
+                토큰이 <code>agent_rtc_uid</code>에 맞게 발급되었는지, 토큰이 만료되지 않았는지 확인해 주세요.
+              </span>
+            </span>
+            <span class="lang-en">
+              The RTC token server and Agent server operate independently.
+              Even if the STT server accepts the request and returns a 200 response, the agent will not function properly if there is an issue with the RTC token.
+              <span class="callout callout-warning">
+                <span class="callout-label">Check:</span>
+                Verify that the token was generated for the correct <code>agent_rtc_uid</code> and that it has not expired.
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="qna-item" id="q-worker-per-lang">
+          <div class="q">
+            <span class="lang-kr"
+              >하나의 worker에서 여러 언어를 동시에 번역할 수 있나요?</span
+            >
+            <span class="lang-en"
+              >Can a single worker translate multiple languages at the same
+              time?</span
+            >
+          </div>
+          <div class="a">
+            <span class="lang-kr">
+              아니요. STT(V2V) 서비스는 품질과 안정성을 위해
+              <strong>worker 1개당 1개 번역 언어</strong>만 지원하도록 설계되어
+              있습니다. 다중 언어 자막이 필요한 경우, 언어별로 worker를 분리하여
+              각각 구성해야 합니다.
+              <span class="code-block">
+                <span class="callout-label">예시:</span><br />
+                "name": "translation_en" → 한국어 → 영어<br />
+                "name": "translation_zh" → 한국어 → 중국어
+              </span>
+            </span>
+            <span class="lang-en">
+              No. The STT(V2V) service is designed to support
+              <strong>only one translation language per worker</strong> for
+              quality and stability. For multi-language subtitles, configure
+              separate workers for each target language.
+              <span class="code-block">
+                <span class="callout-label">Example:</span><br />
+                "name": "translation_en" → Korean → English<br />
+                "name": "translation_zh" → Korean → Chinese
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="qna-item" id="q-uid-mismatch">
+          <div class="q">
+            <span class="lang-kr"
+              ><code>agent_rtc_uid</code>와 <code>remote_rtc_uids</code>의
+              차이점은 무엇인가요?</span
+            >
+            <span class="lang-en"
+              >What is the difference between <code>agent_rtc_uid</code> and
+              <code>remote_rtc_uids</code>?</span
+            >
+          </div>
+          <div class="a">
+            <span class="lang-kr">
+              <span class="code-block">
+                <code>agent_rtc_uid</code> — 에이전트(번역 봇)의 UID. 채널에 참여할 에이전트의 고유 ID를 지정합니다.<br />
+                <code>remote_rtc_uids</code> — 번역 대상 유저의 UID 목록. 에이전트가 음성을 수신할 실제 사용자의 UID를 지정합니다.
+              </span>
+              <span class="callout callout-warning">
+                <span class="callout-label">흔한 실수:</span>
+                <code>remote_rtc_uids</code>에 존재하지 않는 UID를 넣거나, 에이전트 자신의 UID를 넣는 경우가 있습니다. 반드시 채널에 참여 중인 유저의 UID를 지정해 주세요.
+              </span>
+            </span>
+            <span class="lang-en">
+              <span class="code-block">
+                <code>agent_rtc_uid</code> — The agent's (translation bot) UID. Specifies the unique ID for the agent joining the channel.<br />
+                <code>remote_rtc_uids</code> — List of target user UIDs. Specifies the actual users whose audio the agent will receive and translate.
+              </span>
+              <span class="callout callout-warning">
+                <span class="callout-label">Common mistake:</span>
+                Using a non-existent UID or the agent's own UID in <code>remote_rtc_uids</code>. Always use the UID of a user who is active in the channel.
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="qna-item" id="q-token-mismatch">
+          <div class="q">
+            <span class="lang-kr">에이전트 토큰은 어떻게 발급해야 하나요?</span>
+            <span class="lang-en">How should I generate the agent token?</span>
+          </div>
+          <div class="a">
+            <span class="lang-kr">
+              <code>token</code>은 반드시 <code>agent_rtc_uid</code>에 해당하는
+              에이전트의 토큰으로 발급받아야 합니다.
+              <span class="code-block">
+                예: agent_rtc_uid가 "1002"이면 → UID 1002에 대한 토큰을 생성
+              </span>
+              <span class="callout callout-warning">
+                <span class="callout-label">주의:</span>
+                유저의 토큰을 에이전트 토큰 자리에 사용하면 오류가 발생합니다.
+              </span>
+            </span>
+            <span class="lang-en">
+              The <code>token</code> must be generated for the
+              <code>agent_rtc_uid</code>.
+              <span class="code-block">
+                e.g. agent_rtc_uid is "1002" → generate token for UID 1002
+              </span>
+              <span class="callout callout-warning">
+                <span class="callout-label">Note:</span>
+                Using a user's token in place of the agent's token will result in an error.
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="qna-item" id="q-409-conflict">
+          <div class="q">
+            <span class="lang-kr"
+              >동일 채널에서 여러 언어로 번역 에이전트를 시작하면 오류가 발생합니다.</span
+            >
+            <span class="lang-en"
+              >Starting multiple translation agents in the same channel returns
+              a TaskConflict error.</span
+            >
+          </div>
+          <div class="a">
+            <span class="lang-kr">
+              각 에이전트의 <code>name</code> 필드에 고유한 값을 사용해야
+              합니다. 동일한 <code>name</code>으로 두 번째 에이전트를 시작하면
+              기존 에이전트와 충돌하여 <code>409 TaskConflict</code> 오류가
+              발생합니다.
+              <span class="callout callout-info">
+                <span class="callout-label">해결 방법:</span>
+                언어별로 고유한 name을 부여하세요.
+              </span>
+              <span class="code-block">
+                "name": "agora_translation_test_id_en" → 영어 Agent<br />
+                "name": "agora_translation_test_id_zh" → 중국어 Agent
+              </span>
+            </span>
+            <span class="lang-en">
+              Each agent must have a unique <code>name</code> field. Starting a
+              second agent with the same <code>name</code> causes a conflict
+              with the existing agent, resulting in a
+              <code>409 TaskConflict</code> error.
+              <span class="callout callout-info">
+                <span class="callout-label">Solution:</span>
+                Assign a unique name per language.
+              </span>
+              <span class="code-block">
+                "name": "agora_translation_test_id_en" → English Agent<br />
+                "name": "agora_translation_test_id_zh" → Chinese Agent
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- ==================== Troubleshooting ==================== -->
+        <div class="section-title" id="troubleshooting">
+          <span class="lang-kr">트러블슈팅 템플릿</span><span class="lang-en">Troubleshooting Template</span>
+        </div>
+
+        <p style="font-size: 15px; color: #555; margin-bottom: 24px">
+          <span class="lang-kr"
+            >문제 발생 시 아래 정보를 함께 공유해 주시면 빠른 해결이
+            가능합니다.</span
+          >
+          <span class="lang-en"
+            >When facing issues, please provide the following information for
+            faster resolution.</span
+          >
+        </p>
+
+        <div class="template-box" id="tpl-basic">
+          <h3>
+            <span class="tag tag-error">Required</span>
+            <span class="lang-kr">기본 정보</span>
+            <span class="lang-en">Basic Info</span>
+          </h3>
+          <div class="field-row">
+            <span class="field-label"
+              ><span class="lang-kr">채널명</span
+              ><span class="lang-en">Channel Name</span></span
+            >
+            <span class="field-value">e.g. test_channel_01</span>
+          </div>
+          <div class="field-row">
+            <span class="field-label"
+              ><span class="lang-kr">에이전트 ID</span
+              ><span class="lang-en">Agent ID</span></span
+            >
+            <span class="field-value">e.g. agent-abc123</span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">App ID</span>
+            <span class="field-value">e.g. aab236bhelshyg27</span>
+          </div>
+          <div class="field-row">
+            <span class="field-label"
+              ><span class="lang-kr">발생 시각</span
+              ><span class="lang-en">Timestamp</span></span
+            >
+            <span class="field-value">e.g. 2026-03-17 14:30 KST</span>
+          </div>
+        </div>
+
+        <div class="template-box" id="tpl-api">
+          <h3>
+            <span class="tag tag-config">API Details</span>
+            <span class="lang-kr">RESTful API 정보</span>
+            <span class="lang-en">RESTful API Info</span>
+          </h3>
+          <div class="field-row">
+            <span class="field-label">API Endpoint</span>
+            <span class="field-value">e.g. POST /v1/projects/{appid}/join</span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Request Body</span>
+            <span class="field-value"
+              ><span class="lang-kr">JSON body</span
+              ><span class="lang-en"
+                >JSON body</span
+              ></span
+            >
+          </div>
+          <div class="field-row">
+            <span class="field-label">Response Status Code</span>
+            <span class="field-value">e.g. 401, 500, 200</span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Response Body</span>
+            <span class="field-value"
+              ><span class="lang-kr">에러 메시지 전문 붙여넣기</span
+              ><span class="lang-en">Paste full error message</span></span
+            >
+          </div>
+        </div>
+
+        <div class="template-box" id="tpl-optional">
+          <h3>
+            <span class="tag tag-general">Optional</span>
+            <span class="lang-kr">추가 정보</span>
+            <span class="lang-en">Additional Context</span>
+          </h3>
+          <div class="field-row" style="flex-direction: column; gap: 8px">
+            <span class="field-label"
+              ><span class="lang-kr">재현 절차 <span style="font-weight: 400; color: #999; font-size: 13px">(예시)</span></span
+              ><span class="lang-en">Steps to Reproduce <span style="font-weight: 400; color: #999; font-size: 13px">(example)</span></span></span
+            >
+            <div
+              class="field-value"
+              style="
+                border-bottom: none;
+                color: #666;
+                font-size: 14px;
+                line-height: 1.8;
+              ">
+              <span class="lang-kr">
+                1. Console에서 App ID <code>aab236b***</code>로 프로젝트 생성<br />
+                2. POST <code>/v1/projects/{appid}/join</code> 호출하여
+                에이전트를 채널 <code>test_channel_01</code>에 참여시킴<br />
+                3. 클라이언트(Web SDK v4.23.0)에서 동일 채널에 입장<br />
+                4. 클라이언트가 음성을 전송하면 에이전트가 약 5초간 STT 변환 후
+                응답 없음<br />
+                5. 에러 확인
+              </span>
+              <span class="lang-en">
+                1. Create a project with App ID <code>aab236b***</code> in
+                Console<br />
+                2. Call POST <code>/v1/projects/{appid}/join</code> to join
+                agent to channel <code>test_channel_01</code><br />
+                3. Join the same channel from client (Web SDK v4.23.0)<br />
+                4. Client sends voice — agent performs STT for ~5 sec, then no
+                response<br />
+                5. error
+              </span>
+            </div>
+          </div>
+          <div class="note">
+            <span class="lang-kr"
+              >* 로그 파일이나 스크린샷이 있으면 함께 첨부해 주세요.</span
+            >
+            <span class="lang-en"
+              >* Attach logs or screenshots if available.</span
+            >
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- ==================== Error Codes ==================== -->
+        <div class="section-title" id="error-codes"><span class="lang-kr">주요 에러 코드</span><span class="lang-en">Common Error Codes</span></div>
+
+        <table style="width: 100%; font-size: 15px; border-collapse: collapse">
+          <thead>
+            <tr style="text-align: left; border-bottom: 2px solid #ddd">
+              <th style="padding: 8px 12px; font-weight: 600">Code</th>
+              <th style="padding: 8px 12px; font-weight: 600">
+                <span class="lang-kr">의미</span
+                ><span class="lang-en">Meaning</span>
+              </th>
+              <th style="padding: 8px 12px; font-weight: 600">
+                <span class="lang-kr">조치</span
+                ><span class="lang-en">Action</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              id="err-200"
+              style="border-bottom: 1px solid #eee; scroll-margin-top: 24px">
+              <td style="padding: 8px 12px; font-family: monospace">200</td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr">성공 (주의)</span
+                ><span class="lang-en">Success (Caution)</span>
+              </td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr"
+                  >200이어도 토큰 문제 시 에이전트 미동작 가능 — <a href="#q-200-but-fail" style="color: inherit; text-decoration: underline">상세 보기</a></span
+                ><span class="lang-en"
+                  >Agent may not work even with 200 if token is invalid — <a href="#q-200-but-fail" style="color: inherit; text-decoration: underline">details</a></span
+                >
+              </td>
+            </tr>
+            <tr
+              id="err-401"
+              style="border-bottom: 1px solid #eee; scroll-margin-top: 24px">
+              <td style="padding: 8px 12px; font-family: monospace">401</td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr">인증 실패</span
+                ><span class="lang-en">Unauthorized</span>
+              </td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr"></span>
+                  Token / Client ID, Client Secret 재확인
+                </span>
+
+                <span class="lang-en"
+                  >Verify Token / Client ID / Client Secret</span
+                >
+              </td>
+            </tr>
+            <tr
+              id="err-403"
+              style="border-bottom: 1px solid #eee; scroll-margin-top: 24px">
+              <td style="padding: 8px 12px; font-family: monospace">403</td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr">권한 없음</span
+                ><span class="lang-en">Forbidden</span>
+              </td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr">프로젝트 권한 및 IP 허용 목록 확인</span
+                ><span class="lang-en"
+                  >Check project permissions and IP allowlist</span
+                >
+              </td>
+            </tr>
+            <tr
+              id="err-409"
+              style="border-bottom: 1px solid #eee; scroll-margin-top: 24px">
+              <td style="padding: 8px 12px; font-family: monospace">409</td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr">작업 충돌</span
+                ><span class="lang-en">Task Conflict</span>
+              </td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr"
+                  >에이전트 <code>name</code>을 고유하게 설정</span
+                ><span class="lang-en"
+                  >Use a unique agent <code>name</code></span
+                >
+              </td>
+            </tr>
+            <tr
+              id="err-404"
+              style="border-bottom: 1px solid #eee; scroll-margin-top: 24px">
+              <td style="padding: 8px 12px; font-family: monospace">404</td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr">리소스 없음</span
+                ><span class="lang-en">Not Found</span>
+              </td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr">Endpoint URL, App ID, RESTful API Parameters 확인</span
+                ><span class="lang-en">Verify Endpoint URL, App ID and RESTful API Parameters</span>
+              </td>
+            </tr>
+            <tr
+              id="err-500"
+              style="border-bottom: 1px solid #eee; scroll-margin-top: 24px">
+              <td style="padding: 8px 12px; font-family: monospace">500</td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr">서버 오류</span
+                ><span class="lang-en">Internal Server Error</span>
+              </td>
+              <td style="padding: 8px 12px">
+                <span class="lang-kr"
+                  >지원팀에 문의 (<a
+                    href="#troubleshooting"
+                    style="color: inherit; text-decoration: underline"
+                    >위 템플릿 사용</a
+                  >)</span
+                ><span class="lang-en"
+                  >Contact support (<a
+                    href="#troubleshooting"
+                    style="color: inherit; text-decoration: underline"
+                    >use template above</a
+                  >)</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <hr class="divider" />
+
+        <!-- ==================== Resources ==================== -->
+        <div class="section-title" id="resources"><span class="lang-kr">리소스</span><span class="lang-en">Resources</span></div>
+
+        <div style="display: flex; gap: 16px; flex-wrap: wrap">
+          <a href="https://dl.agoralab.co/v2v/" target="_blank" style="
+            display: block; flex: 1; min-width: 200px; padding: 20px 24px;
+            background: #fff; border: 1px solid #e5e5e5; border-radius: 6px;
+            text-decoration: none; color: #2c2c2c; transition: border-color 0.15s ease;
+          ">
+            <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px">
+              <span class="lang-kr">데모</span>
+              <span class="lang-en">Demo</span>
+            </div>
+            <div style="font-size: 14px; color: #888">
+              <span class="lang-kr">STT(V2V) 실시간 체험</span>
+              <span class="lang-en">Try STT(V2V) live</span>
+            </div>
+          </a>
+          <a href="https://dl.agoralab.co/v2v/docs/#/ko/" target="_blank" style="
+            display: block; flex: 1; min-width: 200px; padding: 20px 24px;
+            background: #fff; border: 1px solid #e5e5e5; border-radius: 6px;
+            text-decoration: none; color: #2c2c2c; transition: border-color 0.15s ease;
+          ">
+            <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px">
+              <span class="lang-kr">공식 문서</span>
+              <span class="lang-en">Documentation</span>
+            </div>
+            <div style="font-size: 14px; color: #888">
+              <span class="lang-kr">API 레퍼런스 및 가이드</span>
+              <span class="lang-en">API reference & guides</span>
+            </div>
+          </a>
+        </div>
+
+        <footer>
+          Agora STT(V2V) &mdash; FAQ & Troubleshooting Guide
+          &nbsp;&middot;&nbsp; Agora
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      // Language toggle
+      function setLang(lang) {
+        document.body.className = "lang-" + lang;
+        document.querySelectorAll(".lang-toggle button").forEach(btn => {
+          btn.classList.toggle(
+            "selected",
+            btn.getAttribute("onclick").includes("'" + lang + "'"),
+          );
+        });
+      }
+
+      // Active sidebar link on scroll
+      const navLinks = document.querySelectorAll(".sidebar nav a");
+      const navTargetIds = [
+        ...new Set([...navLinks].map(a => a.getAttribute("href").slice(1))),
+      ];
+      const navTargets = navTargetIds
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+
+      function updateActive() {
+        let current = "";
+        // If scrolled to bottom, activate the last nav target
+        const atBottom =
+          window.innerHeight + window.scrollY >=
+          document.body.scrollHeight - 40;
+        if (atBottom) {
+          current = navTargetIds[navTargetIds.length - 1];
+        } else {
+          navTargets.forEach(el => {
+            if (el.getBoundingClientRect().top <= 80) current = el.id;
+          });
+        }
+        navLinks.forEach(link => {
+          link.classList.toggle(
+            "active",
+            link.getAttribute("href") === "#" + current,
+          );
+        });
+      }
+
+      window.addEventListener("scroll", updateActive, { passive: true });
+      updateActive();
+
+      // Highlight Q&A on click — persistent until another is clicked
+      function clearHighlights() {
+        document.querySelectorAll(".highlight").forEach(el => {
+          el.classList.remove("highlight");
+        });
+      }
+
+      function highlightTarget(id) {
+        clearHighlights();
+        const target = document.getElementById(id);
+        if (target && (target.classList.contains("qna-item") || target.classList.contains("template-box"))) {
+          target.classList.add("highlight");
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+
+      // Scroll to center + highlight for all internal links
+      function handleInternalLink(e, link) {
+        const href = link.getAttribute("href");
+        if (!href || !href.startsWith("#")) return;
+        e.preventDefault();
+        const id = href.slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          clearHighlights();
+          if (target.classList.contains("qna-item") || target.classList.contains("template-box") || target.tagName === "TR") {
+            target.classList.add("highlight");
+          }
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        document.querySelector(".sidebar").classList.remove("open");
+      }
+
+      navLinks.forEach(link => {
+        link.addEventListener("click", (e) => handleInternalLink(e, link));
+      });
+
+      // Also handle inline links (e.g. error code table "상세 보기", troubleshooting links)
+      document.querySelectorAll('.main a[href^="#"]').forEach(link => {
+        link.addEventListener("click", (e) => handleInternalLink(e, link));
+      });
+    </script>
+  </body>
+</html>
