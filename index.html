@@ -1426,21 +1426,28 @@
         setTimeout(() => { clickLock = false; }, 1000);
       }
 
-      // Scroll to center + highlight for all internal links
+      // Scroll + highlight for all internal links, update URL hash
+      function navigateTo(id, smooth) {
+        const target = document.getElementById(id);
+        if (!target) return;
+        clearHighlights();
+        if (target.classList.contains("qna-item") || target.classList.contains("template-box") || target.tagName === "TR") {
+          target.classList.add("highlight");
+        }
+        setActiveNav(id);
+        // section-title → show from top; individual items → center
+        const isSection = target.classList.contains("section-title");
+        target.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: isSection ? "start" : "center" });
+      }
+
       function handleInternalLink(e, link) {
         const href = link.getAttribute("href");
         if (!href || !href.startsWith("#")) return;
         e.preventDefault();
         const id = href.slice(1);
-        const target = document.getElementById(id);
-        if (target) {
-          clearHighlights();
-          if (target.classList.contains("qna-item") || target.classList.contains("template-box") || target.tagName === "TR") {
-            target.classList.add("highlight");
-          }
-          setActiveNav(id);
-          target.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
+        // Update URL hash so the link is shareable
+        history.replaceState(null, "", "#" + id);
+        navigateTo(id, true);
         document.querySelector(".sidebar").classList.remove("open");
       }
 
@@ -1529,6 +1536,19 @@
           toastTimer = setTimeout(() => toast.classList.remove("show"), 1500);
         });
       }
+
+      // On page load: if URL has a hash, navigate to it
+      if (window.location.hash) {
+        const id = window.location.hash.slice(1);
+        // Small delay so the DOM is fully laid out before scrolling
+        requestAnimationFrame(() => navigateTo(id, false));
+      }
+
+      // Handle browser back/forward with hash changes
+      window.addEventListener("hashchange", () => {
+        const id = window.location.hash.slice(1);
+        if (id) navigateTo(id, true);
+      });
 
       // Clear button for search
       document.getElementById("lang-search-clear").addEventListener("click", function() {
