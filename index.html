@@ -323,6 +323,49 @@
         margin-right: 4px;
       }
 
+      .lang-code {
+        cursor: pointer;
+        padding: 2px 6px;
+        border-radius: 3px;
+        transition: background 0.15s ease;
+      }
+      .lang-code:hover {
+        background: #e8f0fe;
+      }
+      .lang-code.copied {
+        background: #d4edda;
+      }
+      .lang-highlight {
+        background: #fff3cd;
+        font-weight: 600;
+        border-radius: 2px;
+        padding: 0 1px;
+      }
+      #lang-table tbody tr {
+        border-bottom: 1px solid #f0f0ee;
+        transition: background 0.1s ease;
+      }
+      #lang-table tbody tr:hover {
+        background: #f7f7f5;
+      }
+      .copy-toast {
+        position: fixed;
+        background: #2c2c2c;
+        color: #fff;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 13px;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+        white-space: nowrap;
+        transform: translate(-50%, -120%);
+      }
+      .copy-toast.show {
+        opacity: 1;
+      }
+
       .a .field-table {
         display: block;
         margin: 12px 0 8px;
@@ -517,6 +560,11 @@
           <a href="#usage" class="nav-primary" style="margin-top: 16px"><span class="lang-kr">사용량</span><span class="lang-en">Usage</span></a>
           <a href="#q-check-usage"><span class="lang-kr">사용량 확인</span><span class="lang-en">Check usage</span></a>
 
+          <a href="#supported-languages" class="nav-primary" style="margin-top: 16px"
+            ><span class="lang-kr">지원 언어</span><span class="lang-en">Supported Languages</span></a
+          >
+          <a href="#supported-languages"><span class="lang-kr">언어 확인</span><span class="lang-en">Language lookup</span></a>
+
           <a href="#faq" class="nav-primary" style="margin-top: 16px"
             ><span class="lang-kr">자주 묻는 질문</span><span class="lang-en">Frequently Asked Questions</span></a
           >
@@ -630,6 +678,142 @@
               </span>
             </span>
           </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- ==================== Supported Languages ==================== -->
+        <div class="section-title" id="supported-languages"><span class="lang-kr">지원 언어</span><span class="lang-en">Supported Languages</span></div>
+
+        <div style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px">
+          <div style="position: relative; width: 100%; max-width: 360px">
+            <input
+              type="text"
+              id="lang-search"
+              placeholder="Search language or code..."
+              style="
+                width: 100%;
+                padding: 10px 36px 10px 14px;
+                font-size: 14px;
+                border: 1px solid #e5e5e5;
+                border-radius: 6px;
+                outline: none;
+                font-family: inherit;
+                transition: border-color 0.15s ease;
+              "
+              onfocus="this.style.borderColor='#4a90d9'"
+              onblur="this.style.borderColor='#e5e5e5'"
+              oninput="filterLanguages()"
+            />
+            <button
+              id="lang-search-clear"
+              style="
+                position: absolute;
+                right: 8px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-size: 18px;
+                color: #999;
+                padding: 2px 6px;
+                line-height: 1;
+                display: none;
+              "
+              title="Clear"
+            >&times;</button>
+          </div>
+          <span id="lang-count" style="font-size: 13px; color: #888; white-space: nowrap"></span>
+        </div>
+
+        <div style="max-height: 520px; overflow-y: auto; border: 1px solid #e5e5e5; border-radius: 6px; background: #fff">
+          <table id="lang-table" style="width: 100%; font-size: 14px; border-collapse: collapse">
+            <thead style="position: sticky; top: 0; background: #f9f9f7; z-index: 1">
+              <tr style="border-bottom: 2px solid #e5e5e5">
+                <th style="padding: 10px 14px; font-weight: 600; text-align: left">
+                  <span class="lang-kr">언어</span><span class="lang-en">Language</span>
+                </th>
+                <th style="padding: 10px 14px; font-weight: 600; text-align: left">
+                  <span class="lang-kr">코드</span><span class="lang-en">Code</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                            <tr><td style="padding: 7px 14px">Korean (Korea)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">ko-KR</span></td></tr>
+
+              <tr><td style="padding: 7px 14px">Afrikaans (South Africa)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">af-ZA</span></td></tr>
+
+              <tr><td style="padding: 7px 14px">Arabic</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">ar-AE</span></td></tr>
+
+              <tr><td style="padding: 7px 14px">Norwegian</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">no-NO</span></td></tr>
+              <tr><td style="padding: 7px 14px">Catalan</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">ca-ES</span></td></tr>
+
+
+
+              <tr><td style="padding: 7px 14px">Azerbaijani (Latin, Azerbaijan)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">az-AZ</span></td></tr>
+              <tr><td style="padding: 7px 14px">Belarusian</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">bn-BY</span></td></tr>
+              <tr><td style="padding: 7px 14px">Bulgarian (Bulgaria)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">bg-BG</span></td></tr>
+              <tr><td style="padding: 7px 14px">Bengali (India)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">bn-IN</span></td></tr>
+              <tr><td style="padding: 7px 14px">Bosnian (Bosnia and Herzegovina)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">bs-BA</span></td></tr>              
+              <tr><td style="padding: 7px 14px">Czech (Czechia)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">cs-CZ</span></td></tr>
+              <tr><td style="padding: 7px 14px">Welsh (United Kingdom)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">cy-GB</span></td></tr>
+              <tr><td style="padding: 7px 14px">Danish (Denmark)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">da-DK</span></td></tr>
+              <tr><td style="padding: 7px 14px">German (Germany)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">de-DE</span></td></tr>
+              <tr><td style="padding: 7px 14px">Greek (Greece)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">el-GR</span></td></tr>                 
+              <tr><td style="padding: 7px 14px">English (United States)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">en-US</span></td></tr>
+              
+              <tr><td style="padding: 7px 14px">Spanish (Spain)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">es-ES</span></td></tr>
+              <tr><td style="padding: 7px 14px">Estonian (Estonia)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">et-EE</span></td></tr>
+              <tr><td style="padding: 7px 14px">Basque</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">eu-ES</span></td></tr>
+              <tr><td style="padding: 7px 14px">Persian (Iran)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">fa-IR</span></td></tr>
+              <tr><td style="padding: 7px 14px">Finnish (Finland)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">fi-FI</span></td></tr>
+              <tr><td style="padding: 7px 14px">Filipino (Philippines)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">fil-PH</span></td></tr>
+              <tr><td style="padding: 7px 14px">French (France)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">fr-FR</span></td></tr>
+              <tr><td style="padding: 7px 14px">Galician</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">gl-ES</span></td></tr>
+              <tr><td style="padding: 7px 14px">Gujarati (India)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">gu-IN</span></td></tr>
+              <tr><td style="padding: 7px 14px">Hebrew (Israel)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">he-IL</span></td></tr>
+              <tr><td style="padding: 7px 14px">Hindi (India)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">hi-IN</span></td></tr>
+              <tr><td style="padding: 7px 14px">Croatian (Croatia)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">hr-HR</span></td></tr>
+              <tr><td style="padding: 7px 14px">Hungarian (Hungary)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">hu-HU</span></td></tr>
+              <tr><td style="padding: 7px 14px">Indonesian (Indonesia)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">id-ID</span></td></tr>
+              <tr><td style="padding: 7px 14px">Italian (Italy)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">it-IT</span></td></tr>
+              <tr><td style="padding: 7px 14px">Japanese (Japan)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">ja-JP</span></td></tr>
+              <tr><td style="padding: 7px 14px">Kazakh (Kazakhstan)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">kk-KZ</span></td></tr>
+              <tr><td style="padding: 7px 14px">Kannada (India)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">kn-IN</span></td></tr>
+              <tr><td style="padding: 7px 14px">Lithuanian (Lithuania)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">lt-LT</span></td></tr>
+              <tr><td style="padding: 7px 14px">Latvian (Latvia)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">lv-LV</span></td></tr>
+              <tr><td style="padding: 7px 14px">Macedonian (North Macedonia)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">mk-MK</span></td></tr>
+              <tr><td style="padding: 7px 14px">Malayalam (India)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">ml-IN</span></td></tr>
+              <tr><td style="padding: 7px 14px">Marathi (India)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">mr-IN</span></td></tr>
+              <tr><td style="padding: 7px 14px">Malay (Malaysia)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">ms-MY</span></td></tr>
+              <tr><td style="padding: 7px 14px">Dutch (Netherlands)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">nl-NL</span></td></tr>
+              <tr><td style="padding: 7px 14px">Punjabi (India)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">pa-IN</span></td></tr>
+              <tr><td style="padding: 7px 14px">Polish (Poland)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">pl-PL</span></td></tr>
+              <tr><td style="padding: 7px 14px">Portuguese</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">pt-PT</span></td></tr>
+              <tr><td style="padding: 7px 14px">Romanian (Romania)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">ro-RO</span></td></tr>
+              <tr><td style="padding: 7px 14px">Russian (Russia)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">ru-RU</span></td></tr>
+              <tr><td style="padding: 7px 14px">Slovak (Slovakia)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">sk-SK</span></td></tr>
+              <tr><td style="padding: 7px 14px">Slovenian (Slovenia)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">sl-SI</span></td></tr>
+              <tr><td style="padding: 7px 14px">Albanian (Albania)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">sq-AL</span></td></tr>
+              <tr><td style="padding: 7px 14px">Serbian (Cyrillic, Serbia)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">sr-RS</span></td></tr>
+              <tr><td style="padding: 7px 14px">Swedish (Sweden)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">sv-SE</span></td></tr>
+              <tr><td style="padding: 7px 14px">Kiswahili (Kenya)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">sw-KE</span></td></tr>
+              <tr><td style="padding: 7px 14px">Kiswahili (Tanzania)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">sw-TZ</span></td></tr>
+              <tr><td style="padding: 7px 14px">Tamil (India)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">ta-IN</span></td></tr>
+              <tr><td style="padding: 7px 14px">Telugu (India)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">te-IN</span></td></tr>
+              <tr><td style="padding: 7px 14px">Thai (Thailand)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">th-TH</span></td></tr>
+              <tr><td style="padding: 7px 14px">Turkish</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">tr-TR</span></td></tr>
+              <tr><td style="padding: 7px 14px">Ukrainian</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">uk-UA</span></td></tr>
+              <tr><td style="padding: 7px 14px">Urdu (India)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">ur-IN</span></td></tr>
+              <tr><td style="padding: 7px 14px">Uzbek (Latin, Uzbekistan)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">uz-UZ</span></td></tr>
+              <tr><td style="padding: 7px 14px">Vietnamese (Vietnam)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">vi-VN</span></td></tr>
+
+              <tr><td style="padding: 7px 14px">Chinese</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">zh-CN</span></td></tr>
+
+              <tr><td style="padding: 7px 14px">isiZulu (South Africa)</td><td style="padding: 7px 14px; font-family: monospace; font-size: 13px"><span class="lang-code" onclick="copyCode(this)" title="Click to copy">zu-ZA</span></td></tr>
+            </tbody>
+          </table>
         </div>
 
         <hr class="divider" />
@@ -1123,8 +1307,6 @@
           </tbody>
         </table>
 
-        <hr class="divider" />
-
         <!-- ==================== Resources ==================== -->
         <div class="section-title" id="resources"><span class="lang-kr">리소스</span><span class="lang-en">Resources</span></div>
 
@@ -1269,6 +1451,91 @@
       // Also handle inline links (e.g. error code table "상세 보기", troubleshooting links)
       document.querySelectorAll('.main a[href^="#"]').forEach(link => {
         link.addEventListener("click", (e) => handleInternalLink(e, link));
+      });
+
+      // --- Language table: filter, highlight, copy ---
+      const langTableRows = document.querySelectorAll("#lang-table tbody tr");
+      const langOriginalData = [...langTableRows].map(row => ({
+        el: row,
+        lang: row.cells[0].textContent,
+        code: row.querySelector(".lang-code").textContent,
+      }));
+
+      function filterLanguages() {
+        const query = document.getElementById("lang-search").value.toLowerCase().trim();
+        document.getElementById("lang-search-clear").style.display = query ? "block" : "none";
+        let visibleCount = 0;
+
+        langOriginalData.forEach(({ el, lang, code }) => {
+          const langLower = lang.toLowerCase();
+          const codeLower = code.toLowerCase();
+          const match = !query || langLower.includes(query) || codeLower.includes(query);
+
+          el.style.display = match ? "" : "none";
+          if (match) visibleCount++;
+
+          // Restore original text (remove highlights)
+          el.cells[0].textContent = lang;
+          const codeSpan = el.querySelector(".lang-code");
+          codeSpan.textContent = code;
+
+          // Apply highlight if there's a query
+          if (match && query) {
+            el.cells[0].innerHTML = highlightText(lang, query);
+            codeSpan.innerHTML = highlightText(code, query);
+          }
+        });
+
+        const countEl = document.getElementById("lang-count");
+        if (query) {
+          countEl.textContent = visibleCount + " / " + langOriginalData.length;
+        } else {
+          countEl.textContent = "";
+        }
+      }
+
+      function highlightText(text, query) {
+        const idx = text.toLowerCase().indexOf(query);
+        if (idx === -1) return escapeHtml(text);
+        const before = text.slice(0, idx);
+        const match = text.slice(idx, idx + query.length);
+        const after = text.slice(idx + query.length);
+        return escapeHtml(before) + '<span class="lang-highlight">' + escapeHtml(match) + '</span>' + escapeHtml(after);
+      }
+
+      function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      // Copy toast
+      const toast = document.createElement("div");
+      toast.className = "copy-toast";
+      document.body.appendChild(toast);
+      let toastTimer;
+
+      function copyCode(el) {
+        const code = el.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+          el.classList.add("copied");
+          setTimeout(() => el.classList.remove("copied"), 800);
+
+          // Position toast near the clicked element
+          const rect = el.getBoundingClientRect();
+          toast.textContent = "Copied: " + code;
+          toast.style.left = (rect.left + rect.width / 2) + "px";
+          toast.style.top = rect.top + "px";
+          toast.classList.add("show");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => toast.classList.remove("show"), 1500);
+        });
+      }
+
+      // Clear button for search
+      document.getElementById("lang-search-clear").addEventListener("click", function() {
+        const input = document.getElementById("lang-search");
+        input.value = "";
+        filterLanguages();
+        input.focus();
       });
     </script>
   </body>
