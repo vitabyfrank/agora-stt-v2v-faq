@@ -585,7 +585,7 @@
           >
           <a href="#tpl-basic"><span class="lang-kr">기본 정보</span><span class="lang-en">Basic info</span></a>
           <a href="#tpl-api"><span class="lang-kr">API 정보</span><span class="lang-en">API details</span></a>
-          <a href="#tpl-optional"><span class="lang-kr">추가 정보</span><span class="lang-en">Additional context</span></a>
+          <a href="#tpl-optional"><span class="lang-kr">추가 정보 </span><span class="lang-en">Additional </span></a>
 
           <a href="#error-codes" class="nav-primary" style="margin-top: 16px"
             ><span class="lang-kr">주요 에러 코드</span><span class="lang-en">Common Error Codes</span></a
@@ -1140,19 +1140,50 @@
             <span class="lang-kr">추가 정보</span>
             <span class="lang-en">Additional Context</span>
           </h3>
-          <div class="field-row" style="flex-direction: column; gap: 8px">
-            <span class="field-label"
-              ><span class="lang-kr">재현 절차 <span style="font-weight: 400; color: #999; font-size: 13px">(예시)</span></span
-              ><span class="lang-en">Steps to Reproduce <span style="font-weight: 400; color: #999; font-size: 13px">(example)</span></span></span
-            >
-            <div
-              class="field-value"
-              style="
-                border-bottom: none;
-                color: #666;
-                font-size: 14px;
-                line-height: 1.8;
-              ">
+
+          <!-- Environment -->
+          <div class="field-row" style="flex-direction: column; gap: 4px; margin-bottom: 20px">
+            <span class="field-label" style="font-size: 16px; font-weight: 600; color: #2c2c2c; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
+              <span class="lang-kr">🖥 환경 (Environment)</span>
+              <span class="lang-en">🖥 Environment</span>
+            </span>
+            <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
+              <span class="lang-kr">e.g. Web SDK v4.23.0 </span>
+              <span class="lang-en">e.g. Web SDK v4.23.0 </span>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="field-row" style="flex-direction: column; gap: 4px; margin-bottom: 20px">
+            <span class="field-label" style="font-size: 16px; font-weight: 600; color: #2c2c2c; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
+              <span class="lang-kr">📋 문제 설명 (Description)</span>
+              <span class="lang-en">📋 Description</span>
+            </span>
+            <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
+              <span class="lang-kr">e.g. 에이전트가 채널에 참여한 후 음성 입력을 받지만 STT 변환 결과가 클라이언트에 전달되지 않음</span>
+              <span class="lang-en">e.g. Agent joins the channel and receives audio input, but STT results are not delivered to the client</span>
+            </div>
+          </div>
+
+          <!-- Error Message -->
+          <div class="field-row" style="flex-direction: column; gap: 4px; margin-bottom: 20px">
+            <span class="field-label" style="font-size: 16px; font-weight: 600; color: #c0392b; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
+              <span class="lang-kr">⚠️ 에러 메시지 (Error Message)</span>
+              <span class="lang-en">⚠️ Error Message</span>
+            </span>
+            <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
+              <span class="lang-kr">e.g. <code style="background: #fff0f0; color: #c0392b; padding: 2px 6px; border-radius: 3px">{"code": "AGENT_TIMEOUT", "message": "Agent failed to respond within 10s"}</code></span>
+              <span class="lang-en">e.g. <code style="background: #fff0f0; color: #c0392b; padding: 2px 6px; border-radius: 3px">{"code": "AGENT_TIMEOUT", "message": "Agent failed to respond within 10s"}</code></span>
+            </div>
+          </div>
+
+          <!-- Steps to Reproduce -->
+          <div class="field-row" style="flex-direction: column; gap: 4px; margin-bottom: 20px">
+            <span class="field-label" style="font-size: 16px; font-weight: 600; color: #2c2c2c; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
+              <span class="lang-kr">🔄 재현 절차 (Steps to Reproduce)</span>
+              <span class="lang-en">🔄 Steps to Reproduce</span>
+            </span>
+            <div class="field-value" style="border-bottom: none; color: #666; font-size: 14px; line-height: 1.8">
               <span class="lang-kr">
                 1. Console에서 App ID <code>aab236b***</code>로 프로젝트 생성<br />
                 2. POST <code>/v1/projects/{appid}/join</code> 호출하여
@@ -1174,12 +1205,49 @@
               </span>
             </div>
           </div>
+
+          <!-- What I've Tried -->
+          <div class="field-row" style="flex-direction: column; gap: 4px; margin-bottom: 20px">
+            <span class="field-label" style="font-size: 16px; font-weight: 600; color: #2c2c2c; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
+              <span class="lang-kr">🔧 시도한 해결 방법 (What I've Tried)</span>
+              <span class="lang-en">🔧 What I've Tried</span>
+            </span>
+            <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
+              <span class="lang-kr">e.g. 토큰 재발급, 다른 채널에서 테스트, agent_rtc_uid 변경 등</span>
+              <span class="lang-en">e.g. Regenerated token, tested on a different channel, changed agent_rtc_uid, etc.</span>
+            </div>
+          </div>
+
+          <!-- Key Finding -->
+          <div class="field-row" style="flex-direction: column; gap: 4px; margin-bottom: 20px">
+            <span class="field-label" style="font-size: 16px; font-weight: 600; color: #e67e22; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
+              <span class="lang-kr">💡 핵심 발견 사항 (Key Finding)</span>
+              <span class="lang-en">💡 Key Finding</span>
+            </span>
+            <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
+              <span class="lang-kr">e.g. 동일 설정으로 다른 App ID에서는 정상 동작, 특정 App ID에서만 문제 발생</span>
+              <span class="lang-en">e.g. Same config works with a different App ID, issue is specific to this App ID only</span>
+            </div>
+          </div>
+
+          <!-- Relevant Logs -->
+          <div class="field-row" style="flex-direction: column; gap: 4px; margin-bottom: 8px">
+            <span class="field-label" style="font-size: 16px; font-weight: 600; color: #2c2c2c; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
+              <span class="lang-kr">📄 관련 로그 (Relevant Logs)</span>
+              <span class="lang-en">📄 Relevant Logs</span>
+            </span>
+            <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
+              <span class="lang-kr">콘솔 로그, 네트워크 요청/응답, SDK 로그 등을 붙여넣기 해주세요</span>
+              <span class="lang-en">Paste console logs, network request/response, SDK logs, etc.</span>
+            </div>
+          </div>
+
           <div class="note">
             <span class="lang-kr"
-              >* 로그 파일이나 스크린샷이 있으면 함께 첨부해 주세요.</span
+              >* 로그 파일이나 스크린샷이 있으면 함께 첨부해 주세요. 정보가 상세할수록 빠른 해결이 가능합니다.</span
             >
             <span class="lang-en"
-              >* Attach logs or screenshots if available.</span
+              >* Attach logs or screenshots if available. The more detail you provide, the faster we can resolve your issue.</span
             >
           </div>
         </div>
