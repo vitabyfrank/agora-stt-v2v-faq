@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -215,15 +215,25 @@
       }
 
       /* --- Language visibility --- */
-      body.lang-kr .lang-en {
+      body.lang-kr .lang-en,
+      body.lang-kr .lang-ja {
         display: none;
       }
-      body.lang-en .lang-kr {
+      body.lang-en .lang-kr,
+      body.lang-en .lang-ja {
+        display: none;
+      }
+      body.lang-ja .lang-kr,
+      body.lang-ja .lang-en {
         display: none;
       }
       /* Sidebar: language switching */
       body.lang-kr .sidebar .lang-en,
-      body.lang-en .sidebar .lang-kr {
+      body.lang-kr .sidebar .lang-ja,
+      body.lang-en .sidebar .lang-kr,
+      body.lang-en .sidebar .lang-ja,
+      body.lang-ja .sidebar .lang-kr,
+      body.lang-ja .sidebar .lang-en {
         display: none;
       }
 
@@ -505,6 +515,17 @@
         }
       }
 
+      @media (max-width: 900px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .language-control {
+          margin-left: 0;
+          margin-top: 12px;
+        }
+      }
+
       @media (max-width: 720px) {
         .sidebar {
           position: fixed;
@@ -527,14 +548,6 @@
         }
         .menu-toggle {
           display: flex !important;
-        }
-        header {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .language-control {
-          margin-left: 0;
-          margin-top: 12px;
         }
         .field-row {
           flex-direction: column;
@@ -574,54 +587,54 @@
     <div class="layout">
       <!-- ===== Sidebar ===== -->
       <aside class="sidebar">
-        <div class="sidebar-title"><span class="lang-kr">목차</span><span class="lang-en">Contents</span></div>
+        <div class="sidebar-title"><span class="lang-kr">목차</span><span class="lang-en">Contents</span><span class="lang-ja">目次</span></div>
         <nav>
-          <a href="#getting-started" class="nav-primary"><span class="lang-kr">시작하기</span><span class="lang-en">Getting Started</span></a>
-          <a href="#q-enable-service"><span class="lang-kr">서비스 활성화</span><span class="lang-en">Enable service</span></a>
+          <a href="#getting-started" class="nav-primary"><span class="lang-kr">시작하기</span><span class="lang-en">Getting Started</span><span class="lang-ja">はじめに</span></a>
+          <a href="#q-enable-service"><span class="lang-kr">서비스 활성화</span><span class="lang-en">Enable service</span><span class="lang-ja">サービスの有効化</span></a>
 
           <a href="#supported-languages" class="nav-primary" style="margin-top: 16px"
-            ><span class="lang-kr">지원 언어</span><span class="lang-en">Supported Languages</span></a
+            ><span class="lang-kr">지원 언어</span><span class="lang-en">Supported Languages</span><span class="lang-ja">対応言語</span></a
           >
-          <a href="#supported-languages"><span class="lang-kr">언어 확인</span><span class="lang-en">Language lookup</span></a>
+          <a href="#supported-languages"><span class="lang-kr">언어 확인</span><span class="lang-en">Language lookup</span><span class="lang-ja">言語の確認</span></a>
 
           <a href="#faq" class="nav-primary" style="margin-top: 16px"
-            ><span class="lang-kr">자주 묻는 질문</span><span class="lang-en">Frequently Asked Questions</span></a
+            ><span class="lang-kr">자주 묻는 질문</span><span class="lang-en">Frequently Asked Questions</span><span class="lang-ja">よくある質問</span></a
           >
-          <a href="#q-multilang"><span class="lang-kr">다국어 지원</span><span class="lang-en">Multi-language support</span></a>
-          <a href="#q-multi-agent"><span class="lang-kr">멀티 에이전트</span><span class="lang-en">Multiple agents</span></a>
-          <a href="#q-no-response"><span class="lang-kr">에이전트 무응답</span><span class="lang-en">Agent not responding</span></a>
-          <a href="#q-200-but-fail"><span class="lang-kr">200 성공인데 동작 안 함</span><span class="lang-en">200 OK but not working</span></a>
-          <a href="#q-worker-per-lang"><span class="lang-kr">1 worker = 1 언어</span><span class="lang-en">1 worker = 1 language</span></a>
-          <a href="#q-uid-mismatch"><span class="lang-kr">UID 필드 설명</span><span class="lang-en">UID fields explained</span></a>
-          <a href="#q-token-mismatch"><span class="lang-kr">에이전트 토큰</span><span class="lang-en">Agent token</span></a>
-          <a href="#q-409-conflict"><span class="lang-kr">여러 에이전트 충돌</span><span class="lang-en">Agents Conflict</span></a>
+          <a href="#q-multilang"><span class="lang-kr">다국어 지원</span><span class="lang-en">Multi-language support</span><span class="lang-ja">多言語対応</span></a>
+          <a href="#q-multi-agent"><span class="lang-kr">멀티 에이전트</span><span class="lang-en">Multiple agents</span><span class="lang-ja">複数エージェント</span></a>
+          <a href="#q-no-response"><span class="lang-kr">에이전트 무응답</span><span class="lang-en">Agent not responding</span><span class="lang-ja">エージェントが応答しない</span></a>
+          <a href="#q-200-but-fail"><span class="lang-kr">200 성공인데 동작 안 함</span><span class="lang-en">200 OK but not working</span><span class="lang-ja">200 OK だが動作しない</span></a>
+          <a href="#q-worker-per-lang"><span class="lang-kr">1 worker = 1 언어</span><span class="lang-en">1 worker = 1 language</span><span class="lang-ja">1 worker = 1言語</span></a>
+          <a href="#q-uid-mismatch"><span class="lang-kr">UID 필드 설명</span><span class="lang-en">UID fields explained</span><span class="lang-ja">UIDフィールドの説明</span></a>
+          <a href="#q-token-mismatch"><span class="lang-kr">에이전트 토큰</span><span class="lang-en">Agent token</span><span class="lang-ja">エージェントトークン</span></a>
+          <a href="#q-409-conflict"><span class="lang-kr">여러 에이전트 충돌</span><span class="lang-en">Agents Conflict</span><span class="lang-ja">複数エージェントの競合</span></a>
 
           <a
             href="#troubleshooting"
             class="nav-primary"
             style="margin-top: 16px"
-            ><span class="lang-kr">트러블슈팅 템플릿</span><span class="lang-en">Troubleshooting Template</span></a
+            ><span class="lang-kr">트러블슈팅 템플릿</span><span class="lang-en">Troubleshooting Template</span><span class="lang-ja">トラブルシューティングテンプレート</span></a
           >
-          <a href="#tpl-basic"><span class="lang-kr">기본 정보</span><span class="lang-en">Basic info</span></a>
-          <a href="#tpl-api"><span class="lang-kr">API 정보</span><span class="lang-en">API details</span></a>
-          <a href="#tpl-optional"><span class="lang-kr">추가 정보 </span><span class="lang-en">Additional </span></a>
+          <a href="#tpl-basic"><span class="lang-kr">기본 정보</span><span class="lang-en">Basic info</span><span class="lang-ja">基本情報</span></a>
+          <a href="#tpl-api"><span class="lang-kr">API 정보</span><span class="lang-en">API details</span><span class="lang-ja">API情報</span></a>
+          <a href="#tpl-optional"><span class="lang-kr">추가 정보 </span><span class="lang-en">Additional </span><span class="lang-ja">追加情報</span></a>
 
           <a href="#error-codes" class="nav-primary" style="margin-top: 16px"
-            ><span class="lang-kr">주요 에러 코드</span><span class="lang-en">Common Error Codes</span></a
+            ><span class="lang-kr">주요 에러 코드</span><span class="lang-en">Common Error Codes</span><span class="lang-ja">主なエラーコード</span></a
           >
-          <a href="#err-200"><code>200</code> <span class="lang-kr">성공 (주의)</span><span class="lang-en">Success (Caution)</span></a>
-          <a href="#err-401"><code>401</code> <span class="lang-kr">인증 실패</span><span class="lang-en">Unauthorized</span></a>
-          <a href="#err-403"><code>403</code> <span class="lang-kr">권한 없음</span><span class="lang-en">Forbidden</span></a>
-          <a href="#err-409"><code>409</code> <span class="lang-kr">작업 충돌</span><span class="lang-en">Conflict</span></a>
-          <a href="#err-404"><code>404</code> <span class="lang-kr">리소스 없음</span><span class="lang-en">Not Found</span></a>
-          <a href="#err-500"><code>500</code> <span class="lang-kr">서버 오류</span><span class="lang-en">Server Error</span></a>
+          <a href="#err-200"><code>200</code> <span class="lang-kr">성공 (주의)</span><span class="lang-en">Success (Caution)</span><span class="lang-ja">成功（注意）</span></a>
+          <a href="#err-401"><code>401</code> <span class="lang-kr">인증 실패</span><span class="lang-en">Unauthorized</span><span class="lang-ja">認証失敗</span></a>
+          <a href="#err-403"><code>403</code> <span class="lang-kr">권한 없음</span><span class="lang-en">Forbidden</span><span class="lang-ja">権限なし</span></a>
+          <a href="#err-409"><code>409</code> <span class="lang-kr">작업 충돌</span><span class="lang-en">Conflict</span><span class="lang-ja">競合</span></a>
+          <a href="#err-404"><code>404</code> <span class="lang-kr">리소스 없음</span><span class="lang-en">Not Found</span><span class="lang-ja">リソースが見つかりません</span></a>
+          <a href="#err-500"><code>500</code> <span class="lang-kr">서버 오류</span><span class="lang-en">Server Error</span><span class="lang-ja">サーバーエラー</span></a>
 
           <div data-resource-gate hidden>
             <a href="#resources" class="nav-primary" style="margin-top: 16px"
-              ><span class="lang-kr">리소스</span><span class="lang-en">Resources</span></a
+              ><span class="lang-kr">리소스</span><span class="lang-en">Resources</span><span class="lang-ja">リソース</span></a
             >
-            <a href="https://dl.agoralab.co/v2v/" target="_blank"><span class="lang-kr">데모</span><span class="lang-en">Demo</span></a>
-            <a href="https://dl.agoralab.co/v2v/docs/#/ko/" target="_blank"><span class="lang-kr">공식 문서</span><span class="lang-en">Documentation</span></a>
+            <a href="https://dl.agoralab.co/v2v/" target="_blank"><span class="lang-kr">데모</span><span class="lang-en">Demo</span><span class="lang-ja">デモ</span></a>
+            <a href="https://dl.agoralab.co/v2v/docs/#/ko/" target="_blank"><span class="lang-kr">공식 문서</span><span class="lang-en">Documentation</span><span class="lang-ja">公式ドキュメント</span></a>
           </div>
         </nav>
       </aside>
@@ -632,8 +645,9 @@
           <div>
             <h1>Agora STT(V2V) - Q&A</h1>
             <div class="subtitle">
-              자주 묻는 질문 및 문제 해결 가이드 &nbsp;|&nbsp; Last updated:
-              2026-03-17
+              <span class="lang-kr">자주 묻는 질문 및 문제 해결 가이드 &nbsp;|&nbsp; Last updated: 2026-03-17</span>
+              <span class="lang-en">Frequently asked questions and troubleshooting guide &nbsp;|&nbsp; Last updated: 2026-03-17</span>
+              <span class="lang-ja">よくある質問とトラブルシューティングガイド &nbsp;|&nbsp; 最終更新: 2026-03-17</span>
             </div>
           </div>
           <div class="language-control">
@@ -644,22 +658,30 @@
                 <path d="M12 2a15.3 15.3 0 0 1 0 20"></path>
                 <path d="M12 2a15.3 15.3 0 0 0 0 20"></path>
               </svg>
-              Language
+              <span class="lang-kr">Language</span><span class="lang-en">Language</span><span class="lang-ja">言語</span>
             </span>
-            <div class="lang-toggle" role="group" aria-label="Language selection">
+            <div
+              class="lang-toggle"
+              role="group"
+              aria-label="언어 선택"
+              data-aria-label-kr="언어 선택"
+              data-aria-label-en="Language selection"
+              data-aria-label-ja="言語を選択">
               <button onclick="setLang('kr')" class="selected" aria-pressed="true">한국어</button>
               <button onclick="setLang('en')" aria-pressed="false">EN</button>
+              <button onclick="setLang('ja')" aria-pressed="false">日本語</button>
             </div>
           </div>
         </header>
 
         <!-- ============================== Getting Started ============================== -->
-        <div class="section-title" id="getting-started"><span class="lang-kr">시작하기</span><span class="lang-en">Getting Started</span></div>
+        <div class="section-title" id="getting-started"><span class="lang-kr">시작하기</span><span class="lang-en">Getting Started</span><span class="lang-ja">はじめに</span></div>
 
         <div class="qna-item" id="q-enable-service">
           <div class="q">
             <span class="lang-kr">STT(V2V) 서비스를 사용하려면 어떻게 해야 하나요?</span>
             <span class="lang-en">How do I get started with the STT(V2V) service?</span>
+            <span class="lang-ja">STT(V2V)サービスを利用するにはどうすればよいですか？</span>
           </div>
           <div class="a">
             <span class="lang-kr">
@@ -678,13 +700,21 @@
                 Agora Console → Select Project → Conversational AI Engine → Enable
               </span>
             </span>
+            <span class="lang-ja">
+              まず Agora Console で <strong>Conversational AI Engine</strong> を有効化する必要があります。
+              有効化していない場合、API呼び出し時に権限エラーが返されます。
+              <span class="callout callout-info">
+                <span class="callout-label">有効化手順:</span>
+                Agora Console → プロジェクトを選択 → Conversational AI Engine → 有効化（Enable）
+              </span>
+            </span>
           </div>
         </div>
 
         <hr class="divider" />
 
         <!-- ==================== Supported Languages ==================== -->
-        <div class="section-title" id="supported-languages"><span class="lang-kr">지원 언어</span><span class="lang-en">Supported Languages</span></div>
+        <div class="section-title" id="supported-languages"><span class="lang-kr">지원 언어</span><span class="lang-en">Supported Languages</span><span class="lang-ja">対応言語</span></div>
 
         <div style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px">
           <div style="position: relative; width: 100%; max-width: 360px">
@@ -692,6 +722,9 @@
               type="text"
               id="lang-search"
               placeholder="Search language or code..."
+              data-placeholder-kr="언어 또는 코드 검색..."
+              data-placeholder-en="Search language or code..."
+              data-placeholder-ja="言語またはコードを検索..."
               style="
                 width: 100%;
                 padding: 10px 36px 10px 14px;
@@ -723,6 +756,9 @@
                 display: none;
               "
               title="Clear"
+              data-title-kr="지우기"
+              data-title-en="Clear"
+              data-title-ja="クリア"
             >&times;</button>
           </div>
           <span id="lang-count" style="font-size: 13px; color: #888; white-space: nowrap"></span>
@@ -733,10 +769,10 @@
             <thead style="position: sticky; top: 0; background: #f9f9f7; z-index: 1">
               <tr style="border-bottom: 2px solid #e5e5e5">
                 <th style="padding: 10px 14px; font-weight: 600; text-align: left">
-                  <span class="lang-kr">언어</span><span class="lang-en">Language</span>
+                  <span class="lang-kr">언어</span><span class="lang-en">Language</span><span class="lang-ja">言語</span>
                 </th>
                 <th style="padding: 10px 14px; font-weight: 600; text-align: left">
-                  <span class="lang-kr">코드</span><span class="lang-en">Code</span>
+                  <span class="lang-kr">코드</span><span class="lang-en">Code</span><span class="lang-ja">コード</span>
                 </th>
               </tr>
             </thead>
@@ -822,13 +858,16 @@
         <hr class="divider" />
 
         <!-- ============================== FAQ ============================== -->
-        <div class="section-title" id="faq"><span class="lang-kr">자주 묻는 질문</span><span class="lang-en">Frequently Asked Questions</span></div>
+        <div class="section-title" id="faq"><span class="lang-kr">자주 묻는 질문</span><span class="lang-en">Frequently Asked Questions</span><span class="lang-ja">よくある質問</span></div>
 
         <div class="qna-item" id="q-multilang">
           <div class="q">
             <span class="lang-kr">이 API는 여러 언어를 지원하나요?</span>
             <span class="lang-en"
               >Does this API support multiple languages?</span
+            >
+            <span class="lang-ja"
+              >このAPIは複数の言語に対応していますか？</span
             >
           </div>
           <div class="a">
@@ -839,6 +878,9 @@
             <span class="lang-en"
               >Yes, but you need to start a separate agent for each
               language.</span
+            >
+            <span class="lang-ja"
+              >はい、対応しています。ただし、言語ごとに個別のエージェントを起動する必要があります。</span
             >
           </div>
         </div>
@@ -852,6 +894,9 @@
               >Can I run multiple agents in a single channel at the same
               time?</span
             >
+            <span class="lang-ja"
+              >1つのチャンネルで複数のエージェントを同時に利用できますか？</span
+            >
           </div>
           <div class="a">
             <span class="lang-kr"
@@ -862,6 +907,9 @@
               >Yes. Assign a unique agent name to each agent and they can operate
               in parallel within the same channel.</span
             >
+            <span class="lang-ja"
+              >可能です。各エージェントに一意の agent name を付与すると、同じチャンネル内で並列に動作します。</span
+            >
           </div>
         </div>
 
@@ -870,6 +918,9 @@
             <span class="lang-kr">통화 중 에이전트가 응답하지 않습니다.</span>
             <span class="lang-en"
               >The agent is not responding during a call.</span
+            >
+            <span class="lang-ja"
+              >通話中にエージェントが応答しません。</span
             >
           </div>
           <div class="a">
@@ -880,6 +931,9 @@
               >Please fill out the <a href="#troubleshooting" style="color: inherit; text-decoration: underline">troubleshooting template</a> below and share with
               support.</span
             >
+            <span class="lang-ja"
+              >下記の<a href="#troubleshooting" style="color: inherit; text-decoration: underline">トラブルシューティングテンプレート</a>に記入し、サポートチームへ共有してください。</span
+            >
           </div>
         </div>
 
@@ -887,6 +941,7 @@
           <div class="q">
             <span class="lang-kr">API 응답은 200(성공)인데 에이전트가 동작하지 않습니다.</span>
             <span class="lang-en">API returns 200 (success) but the agent is not working.</span>
+            <span class="lang-ja">APIレスポンスは200（成功）ですが、エージェントが動作しません。</span>
           </div>
           <div class="a">
             <span class="lang-kr">
@@ -905,6 +960,14 @@
                 Verify that the token was generated for the correct <code>agent_rtc_uid</code> and that it has not expired.
               </span>
             </span>
+            <span class="lang-ja">
+              RTCトークンサーバーと Agent サーバーは独立して動作します。
+              STTサーバーがリクエストを正常に受け付けて200レスポンスを返しても、RTCトークンに問題がある場合、エージェントは正常に動作しません。
+              <span class="callout callout-warning">
+                <span class="callout-label">確認事項:</span>
+                トークンが正しい <code>agent_rtc_uid</code> に対して発行されているか、有効期限が切れていないかを確認してください。
+              </span>
+            </span>
           </div>
         </div>
 
@@ -916,6 +979,9 @@
             <span class="lang-en"
               >Can a single worker translate multiple languages at the same
               time?</span
+            >
+            <span class="lang-ja"
+              >1つの worker で複数の言語を同時に翻訳できますか？</span
             >
           </div>
           <div class="a">
@@ -941,6 +1007,16 @@
                 "name": "translation_zh" → Korean → Chinese
               </span>
             </span>
+            <span class="lang-ja">
+              いいえ。STT(V2V)サービスは品質と安定性のため、
+              <strong>worker 1つにつき翻訳先言語は1つ</strong>のみ対応するように設計されています。
+              多言語字幕が必要な場合は、言語ごとに worker を分けてそれぞれ設定してください。
+              <span class="code-block">
+                <span class="callout-label">例:</span><br />
+                "name": "translation_en" → 韓国語 → 英語<br />
+                "name": "translation_zh" → 韓国語 → 中国語
+              </span>
+            </span>
           </div>
         </div>
 
@@ -953,6 +1029,9 @@
             <span class="lang-en"
               >What is the difference between <code>agent_rtc_uid</code> and
               <code>remote_rtc_uids</code>?</span
+            >
+            <span class="lang-ja"
+              ><code>agent_rtc_uid</code> と <code>remote_rtc_uids</code> の違いは何ですか？</span
             >
           </div>
           <div class="a">
@@ -976,6 +1055,16 @@
                 Using a non-existent UID or the agent's own UID in <code>remote_rtc_uids</code>. Always use the UID of a user who is active in the channel.
               </span>
             </span>
+            <span class="lang-ja">
+              <span class="code-block">
+                <code>agent_rtc_uid</code> — エージェント（翻訳ボット）のUIDです。チャンネルに参加するエージェントの一意のIDを指定します。<br />
+                <code>remote_rtc_uids</code> — 翻訳対象ユーザーのUID一覧です。エージェントが音声を受信して翻訳する実際のユーザーを指定します。
+              </span>
+              <span class="callout callout-warning">
+                <span class="callout-label">よくあるミス:</span>
+                <code>remote_rtc_uids</code> に存在しないUIDやエージェント自身のUIDを指定してしまうケースがあります。必ずチャンネルに参加中のユーザーUIDを指定してください。
+              </span>
+            </span>
           </div>
         </div>
 
@@ -983,6 +1072,7 @@
           <div class="q">
             <span class="lang-kr">에이전트 토큰은 어떻게 발급해야 하나요?</span>
             <span class="lang-en">How should I generate the agent token?</span>
+            <span class="lang-ja">エージェントトークンはどのように発行すればよいですか？</span>
           </div>
           <div class="a">
             <span class="lang-kr">
@@ -1007,6 +1097,17 @@
                 Using a user's token in place of the agent's token will result in an error.
               </span>
             </span>
+            <span class="lang-ja">
+              <code>token</code> は必ず <code>agent_rtc_uid</code> に対応する
+              エージェント用のトークンとして発行する必要があります。
+              <span class="code-block">
+                例: agent_rtc_uid が "1002" の場合 → UID 1002 用のトークンを生成
+              </span>
+              <span class="callout callout-warning">
+                <span class="callout-label">注意:</span>
+                ユーザーのトークンをエージェントトークンとして使用するとエラーになります。
+              </span>
+            </span>
           </div>
         </div>
 
@@ -1018,6 +1119,9 @@
             <span class="lang-en"
               >Starting multiple translation agents in the same channel returns
               a TaskConflict error.</span
+            >
+            <span class="lang-ja"
+              >同じチャンネルで複数の翻訳エージェントを開始するとエラーが発生します。</span
             >
           </div>
           <div class="a">
@@ -1049,6 +1153,19 @@
                 "name": "agora_translation_test_id_zh" → Chinese Agent
               </span>
             </span>
+            <span class="lang-ja">
+              各エージェントの <code>name</code> フィールドには一意の値を使用する必要があります。
+              同じ <code>name</code> で2つ目のエージェントを開始すると、既存のエージェントと競合し、
+              <code>409 TaskConflict</code> エラーが発生します。
+              <span class="callout callout-info">
+                <span class="callout-label">解決方法:</span>
+                言語ごとに一意の name を設定してください。
+              </span>
+              <span class="code-block">
+                "name": "agora_translation_test_id_en" → 英語エージェント<br />
+                "name": "agora_translation_test_id_zh" → 中国語エージェント
+              </span>
+            </span>
           </div>
         </div>
 
@@ -1056,7 +1173,7 @@
 
         <!-- ==================== Troubleshooting ==================== -->
         <div class="section-title" id="troubleshooting">
-          <span class="lang-kr">트러블슈팅 템플릿</span><span class="lang-en">Troubleshooting Template</span>
+          <span class="lang-kr">트러블슈팅 템플릿</span><span class="lang-en">Troubleshooting Template</span><span class="lang-ja">トラブルシューティングテンプレート</span>
         </div>
 
         <p style="font-size: 15px; color: #555; margin-bottom: 24px">
@@ -1068,25 +1185,29 @@
             >When facing issues, please provide the following information for
             faster resolution.</span
           >
+          <span class="lang-ja"
+            >問題が発生した場合は、迅速な解決のために以下の情報を共有してください。</span
+          >
         </p>
 
         <div class="template-box" id="tpl-basic">
           <h3>
-            <span class="tag tag-error">Required</span>
+            <span class="tag tag-error"><span class="lang-kr">Required</span><span class="lang-en">Required</span><span class="lang-ja">必須</span></span>
             <span class="lang-kr">기본 정보</span>
             <span class="lang-en">Basic Info</span>
+            <span class="lang-ja">基本情報</span>
           </h3>
           <div class="field-row">
             <span class="field-label"
               ><span class="lang-kr">채널명</span
-              ><span class="lang-en">Channel Name</span></span
+              ><span class="lang-en">Channel Name</span><span class="lang-ja">チャンネル名</span></span
             >
             <span class="field-value">e.g. test_channel_01</span>
           </div>
           <div class="field-row">
             <span class="field-label"
               ><span class="lang-kr">에이전트 ID</span
-              ><span class="lang-en">Agent ID</span></span
+              ><span class="lang-en">Agent ID</span><span class="lang-ja">エージェントID</span></span
             >
             <span class="field-value">e.g. agent-abc123</span>
           </div>
@@ -1097,7 +1218,7 @@
           <div class="field-row">
             <span class="field-label"
               ><span class="lang-kr">발생 시각</span
-              ><span class="lang-en">Timestamp</span></span
+              ><span class="lang-en">Timestamp</span><span class="lang-ja">発生時刻</span></span
             >
             <span class="field-value">e.g. 2026-03-17 14:30 KST</span>
           </div>
@@ -1105,41 +1226,45 @@
 
         <div class="template-box" id="tpl-api">
           <h3>
-            <span class="tag tag-config">API Details</span>
+            <span class="tag tag-config"><span class="lang-kr">API Details</span><span class="lang-en">API Details</span><span class="lang-ja">API 詳細</span></span>
             <span class="lang-kr">RESTful API 정보</span>
             <span class="lang-en">RESTful API Info</span>
+            <span class="lang-ja">RESTful API情報</span>
           </h3>
           <div class="field-row">
-            <span class="field-label">API Endpoint</span>
+            <span class="field-label"><span class="lang-kr">API Endpoint</span><span class="lang-en">API Endpoint</span><span class="lang-ja">API エンドポイント</span></span>
             <span class="field-value">e.g. POST /v1/projects/{appid}/join</span>
           </div>
           <div class="field-row">
-            <span class="field-label">Request Body</span>
+            <span class="field-label"><span class="lang-kr">Request Body</span><span class="lang-en">Request Body</span><span class="lang-ja">リクエスト本文</span></span>
             <span class="field-value"
               ><span class="lang-kr">JSON body</span
               ><span class="lang-en"
                 >JSON body</span
+              ><span class="lang-ja"
+                >JSON ボディ</span
               ></span
             >
           </div>
           <div class="field-row">
-            <span class="field-label">Response Status Code</span>
+            <span class="field-label"><span class="lang-kr">Response Status Code</span><span class="lang-en">Response Status Code</span><span class="lang-ja">レスポンスステータスコード</span></span>
             <span class="field-value">e.g. 401, 500, 200</span>
           </div>
           <div class="field-row">
-            <span class="field-label">Response Body</span>
+            <span class="field-label"><span class="lang-kr">Response Body</span><span class="lang-en">Response Body</span><span class="lang-ja">レスポンス本文</span></span>
             <span class="field-value"
               ><span class="lang-kr">에러 메시지 전문 붙여넣기</span
-              ><span class="lang-en">Paste full error message</span></span
+              ><span class="lang-en">Paste full error message</span><span class="lang-ja">エラーメッセージ全文を貼り付けてください</span></span
             >
           </div>
         </div>
 
         <div class="template-box" id="tpl-optional">
           <h3>
-            <span class="tag tag-general">Optional</span>
+            <span class="tag tag-general"><span class="lang-kr">Optional</span><span class="lang-en">Optional</span><span class="lang-ja">任意</span></span>
             <span class="lang-kr">추가 정보</span>
             <span class="lang-en">Additional Context</span>
+            <span class="lang-ja">追加情報</span>
           </h3>
 
           <!-- Environment -->
@@ -1147,10 +1272,12 @@
             <span class="field-label" style="font-size: 16px; font-weight: 600; color: #2c2c2c; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
               <span class="lang-kr">🖥 환경 (Environment)</span>
               <span class="lang-en">🖥 Environment</span>
+              <span class="lang-ja">🖥 環境</span>
             </span>
             <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
               <span class="lang-kr">e.g. Web SDK v4.23.0 </span>
               <span class="lang-en">e.g. Web SDK v4.23.0 </span>
+              <span class="lang-ja">例: Web SDK v4.23.0 </span>
             </div>
           </div>
 
@@ -1159,10 +1286,12 @@
             <span class="field-label" style="font-size: 16px; font-weight: 600; color: #2c2c2c; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
               <span class="lang-kr">📋 문제 설명 (Description)</span>
               <span class="lang-en">📋 Description</span>
+              <span class="lang-ja">📋 問題の説明</span>
             </span>
             <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
               <span class="lang-kr">e.g. 에이전트가 채널에 참여한 후 음성 입력을 받지만 STT 변환 결과가 클라이언트에 전달되지 않음</span>
               <span class="lang-en">e.g. Agent joins the channel and receives audio input, but STT results are not delivered to the client</span>
+              <span class="lang-ja">例: エージェントはチャンネルに参加して音声入力を受信するが、STT変換結果がクライアントに配信されない</span>
             </div>
           </div>
 
@@ -1171,10 +1300,12 @@
             <span class="field-label" style="font-size: 16px; font-weight: 600; color: #c0392b; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
               <span class="lang-kr">⚠️ 에러 메시지 (Error Message)</span>
               <span class="lang-en">⚠️ Error Message</span>
+              <span class="lang-ja">⚠️ エラーメッセージ</span>
             </span>
             <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
               <span class="lang-kr">e.g. <code style="background: #fff0f0; color: #c0392b; padding: 2px 6px; border-radius: 3px">{"code": "AGENT_TIMEOUT", "message": "Agent failed to respond within 10s"}</code></span>
               <span class="lang-en">e.g. <code style="background: #fff0f0; color: #c0392b; padding: 2px 6px; border-radius: 3px">{"code": "AGENT_TIMEOUT", "message": "Agent failed to respond within 10s"}</code></span>
+              <span class="lang-ja">例: <code style="background: #fff0f0; color: #c0392b; padding: 2px 6px; border-radius: 3px">{"code": "AGENT_TIMEOUT", "message": "Agent failed to respond within 10s"}</code></span>
             </div>
           </div>
 
@@ -1183,6 +1314,7 @@
             <span class="field-label" style="font-size: 16px; font-weight: 600; color: #2c2c2c; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
               <span class="lang-kr">🔄 재현 절차 (Steps to Reproduce)</span>
               <span class="lang-en">🔄 Steps to Reproduce</span>
+              <span class="lang-ja">🔄 再現手順</span>
             </span>
             <div class="field-value" style="border-bottom: none; color: #666; font-size: 14px; line-height: 1.8">
               <span class="lang-kr">
@@ -1204,6 +1336,15 @@
                 response<br />
                 5. error
               </span>
+              <span class="lang-ja">
+                1. Consoleで App ID <code>aab236b***</code> のプロジェクトを作成<br />
+                2. POST <code>/v1/projects/{appid}/join</code> を呼び出し、
+                エージェントをチャンネル <code>test_channel_01</code> に参加させる<br />
+                3. クライアント（Web SDK v4.23.0）から同じチャンネルに参加<br />
+                4. クライアントが音声を送信すると、エージェントが約5秒間STT変換を実行した後、
+                応答しない<br />
+                5. エラーを確認
+              </span>
             </div>
           </div>
 
@@ -1212,10 +1353,12 @@
             <span class="field-label" style="font-size: 16px; font-weight: 600; color: #2c2c2c; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
               <span class="lang-kr">🔧 시도한 해결 방법 (What I've Tried)</span>
               <span class="lang-en">🔧 What I've Tried</span>
+              <span class="lang-ja">🔧 試した解決方法</span>
             </span>
             <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
               <span class="lang-kr">e.g. 토큰 재발급, 다른 채널에서 테스트, agent_rtc_uid 변경 등</span>
               <span class="lang-en">e.g. Regenerated token, tested on a different channel, changed agent_rtc_uid, etc.</span>
+              <span class="lang-ja">例: トークンの再発行、別チャンネルでのテスト、agent_rtc_uid の変更など</span>
             </div>
           </div>
 
@@ -1224,10 +1367,12 @@
             <span class="field-label" style="font-size: 16px; font-weight: 600; color: #e67e22; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
               <span class="lang-kr">💡 핵심 발견 사항 (Key Finding)</span>
               <span class="lang-en">💡 Key Finding</span>
+              <span class="lang-ja">💡 主な発見事項</span>
             </span>
             <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
               <span class="lang-kr">e.g. 동일 설정으로 다른 App ID에서는 정상 동작, 특정 App ID에서만 문제 발생</span>
               <span class="lang-en">e.g. Same config works with a different App ID, issue is specific to this App ID only</span>
+              <span class="lang-ja">例: 同じ設定で別の App ID では正常に動作し、特定の App ID でのみ問題が発生する</span>
             </div>
           </div>
 
@@ -1236,10 +1381,12 @@
             <span class="field-label" style="font-size: 16px; font-weight: 600; color: #2c2c2c; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 4px">
               <span class="lang-kr">📄 관련 로그 (Relevant Logs)</span>
               <span class="lang-en">📄 Relevant Logs</span>
+              <span class="lang-ja">📄 関連ログ</span>
             </span>
             <div class="field-value" style="border-bottom: none; color: #888; font-size: 14px; line-height: 1.8">
               <span class="lang-kr">콘솔 로그, 네트워크 요청/응답, SDK 로그 등을 붙여넣기 해주세요</span>
               <span class="lang-en">Paste console logs, network request/response, SDK logs, etc.</span>
+              <span class="lang-ja">コンソールログ、ネットワークリクエスト/レスポンス、SDKログなどを貼り付けてください</span>
             </div>
           </div>
 
@@ -1250,13 +1397,16 @@
             <span class="lang-en"
               >* Attach logs or screenshots if available. The more detail you provide, the faster we can resolve your issue.</span
             >
+            <span class="lang-ja"
+              >* ログファイルやスクリーンショットがあれば添付してください。情報が詳細であるほど、より早く問題を解決できます。</span
+            >
           </div>
         </div>
 
         <hr class="divider" />
 
         <!-- ==================== Error Codes ==================== -->
-        <div class="section-title" id="error-codes"><span class="lang-kr">주요 에러 코드</span><span class="lang-en">Common Error Codes</span></div>
+        <div class="section-title" id="error-codes"><span class="lang-kr">주요 에러 코드</span><span class="lang-en">Common Error Codes</span><span class="lang-ja">主なエラーコード</span></div>
 
         <table style="width: 100%; font-size: 15px; border-collapse: collapse">
           <thead>
@@ -1264,11 +1414,11 @@
               <th style="padding: 8px 12px; font-weight: 600">Code</th>
               <th style="padding: 8px 12px; font-weight: 600">
                 <span class="lang-kr">의미</span
-                ><span class="lang-en">Meaning</span>
+                ><span class="lang-en">Meaning</span><span class="lang-ja">意味</span>
               </th>
               <th style="padding: 8px 12px; font-weight: 600">
                 <span class="lang-kr">조치</span
-                ><span class="lang-en">Action</span>
+                ><span class="lang-en">Action</span><span class="lang-ja">対応</span>
               </th>
             </tr>
           </thead>
@@ -1279,13 +1429,15 @@
               <td style="padding: 8px 12px; font-family: monospace">200</td>
               <td style="padding: 8px 12px">
                 <span class="lang-kr">성공 (주의)</span
-                ><span class="lang-en">Success (Caution)</span>
+                ><span class="lang-en">Success (Caution)</span><span class="lang-ja">成功（注意）</span>
               </td>
               <td style="padding: 8px 12px">
                 <span class="lang-kr"
                   >200이어도 토큰 문제 시 에이전트 미동작 가능 — <a href="#q-200-but-fail" style="color: inherit; text-decoration: underline">상세 보기</a></span
                 ><span class="lang-en"
                   >Agent may not work even with 200 if token is invalid — <a href="#q-200-but-fail" style="color: inherit; text-decoration: underline">details</a></span
+                ><span class="lang-ja"
+                  >200でもトークンが無効な場合、エージェントが動作しないことがあります — <a href="#q-200-but-fail" style="color: inherit; text-decoration: underline">詳細を見る</a></span
                 >
               </td>
             </tr>
@@ -1295,15 +1447,16 @@
               <td style="padding: 8px 12px; font-family: monospace">401</td>
               <td style="padding: 8px 12px">
                 <span class="lang-kr">인증 실패</span
-                ><span class="lang-en">Unauthorized</span>
+                ><span class="lang-en">Unauthorized</span><span class="lang-ja">認証失敗</span>
               </td>
               <td style="padding: 8px 12px">
-                <span class="lang-kr"></span>
-                  Token / Client ID, Client Secret 재확인
-                </span>
-
+                <span class="lang-kr"
+                  >Token / Client ID, Client Secret 재확인</span
+                >
                 <span class="lang-en"
                   >Verify Token / Client ID / Client Secret</span
+                ><span class="lang-ja"
+                  >Token / Client ID / Client Secret を再確認してください</span
                 >
               </td>
             </tr>
@@ -1313,12 +1466,14 @@
               <td style="padding: 8px 12px; font-family: monospace">403</td>
               <td style="padding: 8px 12px">
                 <span class="lang-kr">권한 없음</span
-                ><span class="lang-en">Forbidden</span>
+                ><span class="lang-en">Forbidden</span><span class="lang-ja">権限なし</span>
               </td>
               <td style="padding: 8px 12px">
                 <span class="lang-kr">프로젝트 권한 및 IP 허용 목록 확인</span
                 ><span class="lang-en"
                   >Check project permissions and IP allowlist</span
+                ><span class="lang-ja"
+                  >プロジェクト権限とIP許可リストを確認してください</span
                 >
               </td>
             </tr>
@@ -1328,13 +1483,15 @@
               <td style="padding: 8px 12px; font-family: monospace">409</td>
               <td style="padding: 8px 12px">
                 <span class="lang-kr">작업 충돌</span
-                ><span class="lang-en">Task Conflict</span>
+                ><span class="lang-en">Task Conflict</span><span class="lang-ja">タスク競合</span>
               </td>
               <td style="padding: 8px 12px">
                 <span class="lang-kr"
                   >에이전트 <code>name</code>을 고유하게 설정</span
                 ><span class="lang-en"
                   >Use a unique agent <code>name</code></span
+                ><span class="lang-ja"
+                  >エージェントの <code>name</code> を一意に設定してください</span
                 >
               </td>
             </tr>
@@ -1344,11 +1501,11 @@
               <td style="padding: 8px 12px; font-family: monospace">404</td>
               <td style="padding: 8px 12px">
                 <span class="lang-kr">리소스 없음</span
-                ><span class="lang-en">Not Found</span>
+                ><span class="lang-en">Not Found</span><span class="lang-ja">リソースが見つかりません</span>
               </td>
               <td style="padding: 8px 12px">
                 <span class="lang-kr">Endpoint URL, App ID, RESTful API Parameters 확인</span
-                ><span class="lang-en">Verify Endpoint URL, App ID and RESTful API Parameters</span>
+                ><span class="lang-en">Verify Endpoint URL, App ID and RESTful API Parameters</span><span class="lang-ja">エンドポイント URL、App ID、RESTful API パラメーターを確認してください</span>
               </td>
             </tr>
             <tr
@@ -1357,7 +1514,7 @@
               <td style="padding: 8px 12px; font-family: monospace">500</td>
               <td style="padding: 8px 12px">
                 <span class="lang-kr">서버 오류</span
-                ><span class="lang-en">Internal Server Error</span>
+                ><span class="lang-en">Internal Server Error</span><span class="lang-ja">内部サーバーエラー</span>
               </td>
               <td style="padding: 8px 12px">
                 <span class="lang-kr"
@@ -1372,6 +1529,12 @@
                     style="color: inherit; text-decoration: underline"
                     >use template above</a
                   >)</span
+                ><span class="lang-ja"
+                  >サポートにお問い合わせください（<a
+                    href="#troubleshooting"
+                    style="color: inherit; text-decoration: underline"
+                    >上記テンプレートを使用</a
+                  >）</span
                 >
               </td>
             </tr>
@@ -1380,7 +1543,7 @@
 
         <section data-resource-gate hidden>
           <!-- ==================== Resources ==================== -->
-          <div class="section-title" id="resources"><span class="lang-kr">리소스</span><span class="lang-en">Resources</span></div>
+          <div class="section-title" id="resources"><span class="lang-kr">리소스</span><span class="lang-en">Resources</span><span class="lang-ja">リソース</span></div>
 
           <div style="display: flex; gap: 16px; flex-wrap: wrap">
             <a href="https://dl.agoralab.co/v2v/" target="_blank" style="
@@ -1391,10 +1554,12 @@
               <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px">
                 <span class="lang-kr">데모</span>
                 <span class="lang-en">Demo</span>
+                <span class="lang-ja">デモ</span>
               </div>
               <div style="font-size: 14px; color: #888">
                 <span class="lang-kr">STT(V2V) 실시간 체험</span>
                 <span class="lang-en">Try STT(V2V) live</span>
+                <span class="lang-ja">STT(V2V)をリアルタイムで試す</span>
               </div>
             </a>
             <a href="https://dl.agoralab.co/v2v/docs/#/ko/" target="_blank" style="
@@ -1405,10 +1570,12 @@
               <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px">
                 <span class="lang-kr">공식 문서</span>
                 <span class="lang-en">Documentation</span>
+                <span class="lang-ja">公式ドキュメント</span>
               </div>
               <div style="font-size: 14px; color: #888">
                 <span class="lang-kr">API 레퍼런스 및 가이드</span>
                 <span class="lang-en">API reference & guides</span>
+                <span class="lang-ja">APIリファレンスとガイド</span>
               </div>
             </a>
           </div>
@@ -1423,14 +1590,48 @@
 
     <script>
       // Language toggle
+      const uiText = {
+        kr: {
+          htmlLang: "ko",
+          copyTitle: "클릭하여 복사",
+          copied: "복사됨",
+        },
+        en: {
+          htmlLang: "en",
+          copyTitle: "Click to copy",
+          copied: "Copied",
+        },
+        ja: {
+          htmlLang: "ja",
+          copyTitle: "クリックしてコピー",
+          copied: "コピーしました",
+        },
+      };
+
       function setLang(lang) {
-        document.body.className = "lang-" + lang;
+        const activeLang = uiText[lang] ? lang : "kr";
+        document.body.className = "lang-" + activeLang;
+        document.documentElement.lang = uiText[activeLang].htmlLang;
         document.querySelectorAll(".lang-toggle button").forEach(btn => {
-          const isSelected = btn.getAttribute("onclick").includes("'" + lang + "'");
+          const isSelected = btn.getAttribute("onclick").includes("'" + activeLang + "'");
           btn.classList.toggle("selected", isSelected);
           btn.setAttribute("aria-pressed", isSelected);
         });
+        document.querySelectorAll("[data-placeholder-" + activeLang + "]").forEach(el => {
+          el.setAttribute("placeholder", el.getAttribute("data-placeholder-" + activeLang));
+        });
+        document.querySelectorAll("[data-title-" + activeLang + "]").forEach(el => {
+          el.setAttribute("title", el.getAttribute("data-title-" + activeLang));
+        });
+        document.querySelectorAll("[data-aria-label-" + activeLang + "]").forEach(el => {
+          el.setAttribute("aria-label", el.getAttribute("data-aria-label-" + activeLang));
+        });
+        document.querySelectorAll(".lang-code").forEach(el => {
+          el.setAttribute("title", uiText[activeLang].copyTitle);
+        });
       }
+
+      setLang("kr");
 
       const resourceGates = document.querySelectorAll("[data-resource-gate]");
       const resourceUnlockTarget = document.querySelector('.sidebar a[href="#q-enable-service"]');
@@ -1613,7 +1814,9 @@
 
           // Position toast near the clicked element
           const rect = el.getBoundingClientRect();
-          toast.textContent = "Copied: " + code;
+          const activeLang = document.body.className.replace("lang-", "");
+          const activeText = uiText[activeLang] || uiText.kr;
+          toast.textContent = activeText.copied + ": " + code;
           toast.style.left = (rect.left + rect.width / 2) + "px";
           toast.style.top = rect.top + "px";
           toast.classList.add("show");
