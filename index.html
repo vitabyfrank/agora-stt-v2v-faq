@@ -157,13 +157,35 @@
       }
 
       /* --- Language Toggle --- */
+      .language-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+        margin-left: 24px;
+      }
+
+      .language-label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #666;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .language-label svg {
+        width: 15px;
+        height: 15px;
+      }
+
       .lang-toggle {
         display: flex;
         border: 1px solid #ddd;
         border-radius: 4px;
         overflow: hidden;
         flex-shrink: 0;
-        margin-left: 24px;
       }
 
       .lang-toggle button {
@@ -478,7 +500,7 @@
         .main {
           margin-left: 0;
         }
-        .lang-toggle {
+        .language-control {
           display: none;
         }
       }
@@ -510,7 +532,7 @@
           flex-direction: column;
           align-items: flex-start;
         }
-        .lang-toggle {
+        .language-control {
           margin-left: 0;
           margin-top: 12px;
         }
@@ -612,9 +634,20 @@
               2026-03-17
             </div>
           </div>
-          <div class="lang-toggle">
-            <button onclick="setLang('kr')" class="selected">한국어</button>
-            <button onclick="setLang('en')">EN</button>
+          <div class="language-control">
+            <span class="language-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M2 12h20"></path>
+                <path d="M12 2a15.3 15.3 0 0 1 0 20"></path>
+                <path d="M12 2a15.3 15.3 0 0 0 0 20"></path>
+              </svg>
+              Language
+            </span>
+            <div class="lang-toggle" role="group" aria-label="Language selection">
+              <button onclick="setLang('kr')" class="selected" aria-pressed="true">한국어</button>
+              <button onclick="setLang('en')" aria-pressed="false">EN</button>
+            </div>
           </div>
         </header>
 
@@ -1389,10 +1422,9 @@
       function setLang(lang) {
         document.body.className = "lang-" + lang;
         document.querySelectorAll(".lang-toggle button").forEach(btn => {
-          btn.classList.toggle(
-            "selected",
-            btn.getAttribute("onclick").includes("'" + lang + "'"),
-          );
+          const isSelected = btn.getAttribute("onclick").includes("'" + lang + "'");
+          btn.classList.toggle("selected", isSelected);
+          btn.setAttribute("aria-pressed", isSelected);
         });
       }
 
