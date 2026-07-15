@@ -616,11 +616,13 @@
           <a href="#err-404"><code>404</code> <span class="lang-kr">리소스 없음</span><span class="lang-en">Not Found</span></a>
           <a href="#err-500"><code>500</code> <span class="lang-kr">서버 오류</span><span class="lang-en">Server Error</span></a>
 
-          <a href="#resources" class="nav-primary" style="margin-top: 16px"
-            ><span class="lang-kr">리소스</span><span class="lang-en">Resources</span></a
-          >
-          <a href="https://dl.agoralab.co/v2v/" target="_blank"><span class="lang-kr">데모</span><span class="lang-en">Demo</span></a>
-          <a href="https://dl.agoralab.co/v2v/docs/#/ko/" target="_blank"><span class="lang-kr">공식 문서</span><span class="lang-en">Documentation</span></a>
+          <div data-resource-gate hidden>
+            <a href="#resources" class="nav-primary" style="margin-top: 16px"
+              ><span class="lang-kr">리소스</span><span class="lang-en">Resources</span></a
+            >
+            <a href="https://dl.agoralab.co/v2v/" target="_blank"><span class="lang-kr">데모</span><span class="lang-en">Demo</span></a>
+            <a href="https://dl.agoralab.co/v2v/docs/#/ko/" target="_blank"><span class="lang-kr">공식 문서</span><span class="lang-en">Documentation</span></a>
+          </div>
         </nav>
       </aside>
 
@@ -1376,39 +1378,41 @@
           </tbody>
         </table>
 
-        <!-- ==================== Resources ==================== -->
-        <div class="section-title" id="resources"><span class="lang-kr">리소스</span><span class="lang-en">Resources</span></div>
+        <section data-resource-gate hidden>
+          <!-- ==================== Resources ==================== -->
+          <div class="section-title" id="resources"><span class="lang-kr">리소스</span><span class="lang-en">Resources</span></div>
 
-        <div style="display: flex; gap: 16px; flex-wrap: wrap">
-          <a href="https://dl.agoralab.co/v2v/" target="_blank" style="
-            display: block; flex: 1; min-width: 200px; padding: 20px 24px;
-            background: #fff; border: 1px solid #e5e5e5; border-radius: 6px;
-            text-decoration: none; color: #2c2c2c; transition: border-color 0.15s ease;
-          ">
-            <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px">
-              <span class="lang-kr">데모</span>
-              <span class="lang-en">Demo</span>
-            </div>
-            <div style="font-size: 14px; color: #888">
-              <span class="lang-kr">STT(V2V) 실시간 체험</span>
-              <span class="lang-en">Try STT(V2V) live</span>
-            </div>
-          </a>
-          <a href="https://dl.agoralab.co/v2v/docs/#/ko/" target="_blank" style="
-            display: block; flex: 1; min-width: 200px; padding: 20px 24px;
-            background: #fff; border: 1px solid #e5e5e5; border-radius: 6px;
-            text-decoration: none; color: #2c2c2c; transition: border-color 0.15s ease;
-          ">
-            <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px">
-              <span class="lang-kr">공식 문서</span>
-              <span class="lang-en">Documentation</span>
-            </div>
-            <div style="font-size: 14px; color: #888">
-              <span class="lang-kr">API 레퍼런스 및 가이드</span>
-              <span class="lang-en">API reference & guides</span>
-            </div>
-          </a>
-        </div>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap">
+            <a href="https://dl.agoralab.co/v2v/" target="_blank" style="
+              display: block; flex: 1; min-width: 200px; padding: 20px 24px;
+              background: #fff; border: 1px solid #e5e5e5; border-radius: 6px;
+              text-decoration: none; color: #2c2c2c; transition: border-color 0.15s ease;
+            ">
+              <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px">
+                <span class="lang-kr">데모</span>
+                <span class="lang-en">Demo</span>
+              </div>
+              <div style="font-size: 14px; color: #888">
+                <span class="lang-kr">STT(V2V) 실시간 체험</span>
+                <span class="lang-en">Try STT(V2V) live</span>
+              </div>
+            </a>
+            <a href="https://dl.agoralab.co/v2v/docs/#/ko/" target="_blank" style="
+              display: block; flex: 1; min-width: 200px; padding: 20px 24px;
+              background: #fff; border: 1px solid #e5e5e5; border-radius: 6px;
+              text-decoration: none; color: #2c2c2c; transition: border-color 0.15s ease;
+            ">
+              <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px">
+                <span class="lang-kr">공식 문서</span>
+                <span class="lang-en">Documentation</span>
+              </div>
+              <div style="font-size: 14px; color: #888">
+                <span class="lang-kr">API 레퍼런스 및 가이드</span>
+                <span class="lang-en">API reference & guides</span>
+              </div>
+            </a>
+          </div>
+        </section>
 
         <footer>
           Agora STT(V2V) &mdash; FAQ & Troubleshooting Guide
@@ -1427,6 +1431,19 @@
           btn.setAttribute("aria-pressed", isSelected);
         });
       }
+
+      const resourceGates = document.querySelectorAll("[data-resource-gate]");
+      const resourceUnlockTarget = document.querySelector('.sidebar a[href="#q-enable-service"]');
+      let resourceUnlockClicks = 0;
+
+      resourceUnlockTarget.addEventListener("click", () => {
+        resourceUnlockClicks += 1;
+        if (resourceUnlockClicks === 5) {
+          resourceGates.forEach(gate => {
+            gate.hidden = false;
+          });
+        }
+      });
 
       // Active sidebar link on scroll
       const navLinks = document.querySelectorAll(".sidebar nav a");
