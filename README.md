@@ -13,7 +13,6 @@ Single-page HTML document covering common questions, configuration pitfalls, and
 | Section | Description |
 |---------|-------------|
 | Getting Started | Service activation via Agora Console |
-| Usage | How to check STT(V2V) usage |
 | FAQ | Multi-language, multi-agent, UID/token config, 409 conflict, 200-but-fail |
 | Troubleshooting | Structured template for reporting issues |
 | Error Codes | 200, 401, 403, 404, 409, 500 with recommended actions |
