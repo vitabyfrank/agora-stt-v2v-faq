@@ -6,7 +6,7 @@
 
 ## 개요
 
-Agora STT V2V API의 자주 묻는 질문, 설정 시 흔한 실수, 에러 해결 방법을 정리한 단일 HTML 페이지입니다. 한국어/영어 전환을 지원합니다.
+Agora STT V2V API의 자주 묻는 질문, 설정 시 흔한 실수, 에러 해결 방법을 정리한 단일 HTML 페이지입니다. 한국어/영어/일본어/중국어 간체 전환과 AI 친화적인 언어별 Markdown FAQ 보기 및 다운로드를 지원합니다.
 
 ## 구성
 
@@ -20,7 +20,8 @@ Agora STT V2V API의 자주 묻는 질문, 설정 시 흔한 실수, 에러 해�
 
 ## 주요 기능
 
-- **한/영 전환** — 한국어 ↔ English 토글
+- **다국어 전환** — 한국어 / English / 日本語 / 简体中文 토글
+- **AI 친화 Markdown 보기/다운로드** — 현재 언어의 Markdown FAQ를 새 탭으로 열거나 명확한 파일명으로 다운로드
 - **사이드바 네비게이션** — 스크롤 인식 active 상태 + 클릭 시 화면 중앙 이동
 - **하이라이트** — 클릭한 항목에 시각적 강조 박스 표시
 - **반응형** — 모바일 대응 (접이식 사이드바)
@@ -29,7 +30,7 @@ Agora STT V2V API의 자주 묻는 질문, 설정 시 흔한 실수, 에러 해�
 
 ## 사용법
 
-브라우저에서 `agora-qna.html`을 열거나, 정적 파일 서버로 실행하세요.
+브라우저에서 `index.html`을 열거나, 정적 파일 서버로 실행하세요.
 
 ```bash
 # Python
@@ -44,3 +45,10 @@ npx serve .
 - [STT(V2V) 데모](https://dl.agoralab.co/v2v/)
 - [STT(V2V) 공식 문서](https://dl.agoralab.co/v2v/docs/#/ko/)
 - [Agora Console](https://console.agora.io/)
+
+## Markdown FAQ 파일
+
+- [한국어](./faq.kr.md)
+- [English](./faq.en.md)
+- [日本語](./faq.ja.md)
+- [简体中文](./faq.zh.md)

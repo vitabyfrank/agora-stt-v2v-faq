@@ -6,7 +6,7 @@ A customer-facing FAQ and troubleshooting reference for the **Agora Speech-to-Sp
 
 ## Overview
 
-Single-page HTML document covering common questions, configuration pitfalls, and error resolution for the Agora STT V2V API. Supports Korean / English toggle.
+Single-page HTML document covering common questions, configuration pitfalls, and error resolution for the Agora STT V2V API. Supports Korean / English / Japanese / Simplified Chinese toggle, with language-specific Markdown FAQ documents for AI-friendly viewing and download.
 
 ## Sections
 
@@ -20,7 +20,8 @@ Single-page HTML document covering common questions, configuration pitfalls, and
 
 ## Features
 
-- **Bilingual toggle** — Korean ↔ English
+- **Multi-language toggle** — Korean / English / Japanese / Simplified Chinese
+- **AI-friendly Markdown view/download** — Language-specific Markdown FAQ opens in a new tab or downloads with a clear filename
 - **Sidebar navigation** — Scroll-aware active state, click-to-center UX
 - **Highlight on navigate** — Visual highlight box on clicked items
 - **Responsive** — Mobile-friendly with collapsible sidebar
@@ -29,7 +30,7 @@ Single-page HTML document covering common questions, configuration pitfalls, and
 
 ## Quick Start
 
-Open `agora-qna.html` in any browser, or serve via a static file server:
+Open `index.html` in any browser, or serve via a static file server:
 
 ```bash
 # Python
@@ -44,3 +45,10 @@ npx serve .
 - [STT(V2V) Demo](https://dl.agoralab.co/v2v/)
 - [STT(V2V) Documentation](https://dl.agoralab.co/v2v/docs/#/ko/)
 - [Agora Console](https://console.agora.io/)
+
+## Markdown FAQ Files
+
+- [Korean](./faq.kr.md)
+- [English](./faq.en.md)
+- [Japanese](./faq.ja.md)
+- [Simplified Chinese](./faq.zh.md)

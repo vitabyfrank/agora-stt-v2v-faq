@@ -163,6 +163,8 @@
         gap: 8px;
         flex-shrink: 0;
         margin-left: 24px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
       }
 
       .language-label {
@@ -212,6 +214,60 @@
       .lang-toggle button:hover:not(.selected) {
         background: #f5f5f3;
         color: #555;
+      }
+
+      .markdown-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .markdown-link,
+      .markdown-download {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #fff;
+        color: #666;
+        font-weight: 500;
+        line-height: 1.2;
+        text-decoration: none;
+        transition: all 0.15s ease;
+        white-space: nowrap;
+      }
+
+      .markdown-link {
+        gap: 5px;
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+
+      .markdown-download {
+        justify-content: center;
+        width: 31px;
+        height: 31px;
+        padding: 0;
+        flex: 0 0 auto;
+      }
+
+      .markdown-link:hover,
+      .markdown-download:hover {
+        background: #f5f5f3;
+        color: #2c2c2c;
+        border-color: #cfcfcf;
+      }
+
+      .markdown-link:focus-visible,
+      .markdown-download:focus-visible {
+        outline: 2px solid #4a90d9;
+        outline-offset: 2px;
+      }
+
+      .markdown-link svg,
+      .markdown-download svg {
+        width: 14px;
+        height: 14px;
       }
 
       /* --- Language visibility --- */
@@ -537,6 +593,7 @@
         .language-control {
           margin-left: 0;
           margin-top: 12px;
+          justify-content: flex-start;
         }
       }
 
@@ -687,6 +744,39 @@
               <button onclick="setLang('en')" aria-pressed="false">EN</button>
               <button onclick="setLang('ja')" aria-pressed="false">日本語</button>
               <button onclick="setLang('zh')" aria-pressed="false">简体中文</button>
+            </div>
+            <div class="markdown-actions">
+              <a
+                id="markdown-link"
+                class="markdown-link"
+                href="./faq.kr.md"
+                target="_blank"
+                rel="noopener"
+                aria-label="현재 언어의 Markdown FAQ 새 탭으로 열기">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <path d="M14 2v6h6"></path>
+                  <path d="M9 15h6"></path>
+                  <path d="M9 18h4"></path>
+                </svg>
+                <span class="lang-kr">Markdown 보기</span>
+                <span class="lang-en">View Markdown</span>
+                <span class="lang-ja">Markdownを見る</span>
+                <span class="lang-zh">查看 Markdown</span>
+              </a>
+              <a
+                id="markdown-download"
+                class="markdown-download"
+                href="./faq.kr.md"
+                download="agora-stt-v2v-faq.ko.md"
+                aria-label="현재 언어의 Markdown FAQ 다운로드"
+                title="현재 언어의 Markdown FAQ 다운로드">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <path d="M7 10l5 5 5-5"></path>
+                  <path d="M12 15V3"></path>
+                </svg>
+              </a>
             </div>
           </div>
         </header>
@@ -1754,21 +1844,37 @@
           htmlLang: "ko",
           copyTitle: "클릭하여 복사",
           copied: "복사됨",
+          markdownHref: "./faq.kr.md",
+          markdownViewLabel: "현재 언어의 Markdown FAQ 새 탭으로 열기",
+          markdownDownloadLabel: "현재 언어의 Markdown FAQ 다운로드",
+          markdownDownloadName: "agora-stt-v2v-faq.ko.md",
         },
         en: {
           htmlLang: "en",
           copyTitle: "Click to copy",
           copied: "Copied",
+          markdownHref: "./faq.en.md",
+          markdownViewLabel: "Open the Markdown FAQ for the current language in a new tab",
+          markdownDownloadLabel: "Download the Markdown FAQ for the current language",
+          markdownDownloadName: "agora-stt-v2v-faq.en.md",
         },
         ja: {
           htmlLang: "ja",
           copyTitle: "クリックしてコピー",
           copied: "コピーしました",
+          markdownHref: "./faq.ja.md",
+          markdownViewLabel: "現在の言語のMarkdown FAQを新しいタブで開く",
+          markdownDownloadLabel: "現在の言語のMarkdown FAQをダウンロード",
+          markdownDownloadName: "agora-stt-v2v-faq.ja.md",
         },
         zh: {
           htmlLang: "zh-CN",
           copyTitle: "点击复制",
           copied: "已复制",
+          markdownHref: "./faq.zh.md",
+          markdownViewLabel: "在新标签页中打开当前语言的 Markdown FAQ",
+          markdownDownloadLabel: "下载当前语言的 Markdown FAQ",
+          markdownDownloadName: "agora-stt-v2v-faq.zh-CN.md",
         },
       };
 
@@ -1793,6 +1899,19 @@
         document.querySelectorAll(".lang-code").forEach(el => {
           el.setAttribute("title", uiText[activeLang].copyTitle);
         });
+        const markdownLink = document.getElementById("markdown-link");
+        if (markdownLink) {
+          markdownLink.setAttribute("href", uiText[activeLang].markdownHref);
+          markdownLink.setAttribute("aria-label", uiText[activeLang].markdownViewLabel);
+          markdownLink.setAttribute("title", uiText[activeLang].markdownViewLabel);
+        }
+        const markdownDownload = document.getElementById("markdown-download");
+        if (markdownDownload) {
+          markdownDownload.setAttribute("href", uiText[activeLang].markdownHref);
+          markdownDownload.setAttribute("download", uiText[activeLang].markdownDownloadName);
+          markdownDownload.setAttribute("aria-label", uiText[activeLang].markdownDownloadLabel);
+          markdownDownload.setAttribute("title", uiText[activeLang].markdownDownloadLabel);
+        }
       }
 
       setLang("kr");
